@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code & SuperClaude Complete Reference Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            border-bottom: 4px solid #3498db;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            color: #34495e;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 20px;
+            margin: 30px 0 20px 0;
+            border-radius: 8px;
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            color: #2c3e50;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+            margin: 25px 0 15px 0;
+            font-size: 1.4rem;
+        }
+
+        h4 {
+            color: #34495e;
+            margin: 20px 0 10px 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Code Styles */
+        code {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        /* Code block for multiple commands */
+        .code-examples {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.85em;
+            line-height: 1.5;
+        }
+
+        .code-examples code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+        }
+
+        /* Workflow section styles */
+        .workflow-section {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .workflow-section h3 {
+            color: #2c3e50;
+            border-left: 4px solid #e74c3c;
+            margin-bottom: 20px;
+        }
+
+        pre {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Shell command highlighting */
+        .shell-comment {
+            color: #5c6370;
+            font-style: italic;
+        }
+
+        .shell-command {
+            color: #61afef;
+        }
+
+        .shell-string {
+            color: #98c379;
+        }
+
+        .shell-flag {
+            color: #e06c75;
+        }
+
+        /* JSON highlighting */
+        .json-key {
+            color: #e06c75;
+        }
+
+        .json-string {
+            color: #98c379;
+        }
+
+        .json-number {
+            color: #d19a66;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            z-index: 100;
+            border-radius: 8px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        nav a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        nav a:hover {
+            background: #ecf0f1;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+                padding: 10px 15px;
+            }
+
+            table {
+                font-size: 0.85rem;
+            }
+
+            th, td {
+                padding: 8px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            nav {
+                display: none;
+            }
+
+            .container {
+                max-width: 100%;
+            }
+
+            h2 {
+                page-break-before: always;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Claude Code and SuperClaude Tools Complete Reference Guide</h1>
+        
+        <nav>
+            <ul>
+                <li><a href="#claude-code">Claude Code</a></li>
+                <li><a href="#superclaude-framework">SuperClaude Framework</a></li>
+                <li><a href="#superclaude-cli">SuperClaude CLI</a></li>
+                <li><a href="#workflows">Workflows</a></li>
+                <li><a href="#configuration">Configuration</a></li>
+                <li><a href="#best-practices">Best Practices</a></li>
+            </ul>
+        </nav>
+
+        <section id="claude-code">
+            <h2>Claude Code Tool Commands</h2>
+            
+            <h3>Core CLI Commands</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Usage Examples</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>claude</code></td>
+                        <td>Start interactive REPL session</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude</code><br>
+                                <code>claude "explain this project"</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>claude -p "query"</code></td>
+                        <td>Query via SDK then exit (headless mode)</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude -p "fix the bug in auth.js"</code><br>
+                                <code>claude -p "analyze performance issues"</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>cat file | claude -p</code></td>
+                        <td>Process piped content</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>cat error.log | claude -p "explain these errors"</code><br>
+                                <code>tail -f app.log | claude -p "monitor for issues"</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>claude -c</code></td>
+                        <td>Continue most recent conversation</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude -c</code><br>
+                                <code>claude -c -p "add more tests"</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>claude -r "id" "query"</code></td>
+                        <td>Resume specific session by ID</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude -r "abc123" "finish the PR"</code><br>
+                                <code>claude -r "session-42" "continue refactoring"</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>claude update</code></td>
+                        <td>Update to latest version</td>
+                        <td><code>claude update</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>claude mcp</code></td>
+                        <td>Configure Model Context Protocol servers</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude mcp add github npx @modelcontextprotocol/server-github</code><br>
+                                <code>claude mcp list</code><br>
+                                <code>claude mcp remove github</code>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>CLI Flags Reference</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Flag</th>
+                        <th>Description</th>
+                        <th>Usage Examples</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>--add-dir</code></td>
+                        <td>Add additional working directories</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude --add-dir ../lib ../shared</code><br>
+                                <code>claude --add-dir /path/to/other/project</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>--allowedTools</code></td>
+                        <td>Whitelist tools without prompting</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude --allowedTools "Read" "Write" "Bash(git *)"</code><br>
+                                <code>claude --allowedTools "Edit(*.py)"</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>--disallowedTools</code></td>
+                        <td>Blacklist specific tools</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude --disallowedTools "Bash(rm *)" "Write(.env)"</code><br>
+                                <code>claude --disallowedTools "Delete"</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>--print, -p</code></td>
+                        <td>Print response and exit</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude -p "explain this function"</code><br>
+                                <code>claude -p "generate unit tests"</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>--output-format</code></td>
+                        <td>Set output format (text/json/stream-json)</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude -p "analyze code" --output-format json</code><br>
+                                <code>claude -p "get metrics" --output-format stream-json</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>--verbose</code></td>
+                        <td>Enable verbose logging</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude --verbose</code><br>
+                                <code>claude -p "debug issue" --verbose</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>--max-turns</code></td>
+                        <td>Limit conversation turns</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude -p "refactor" --max-turns 3</code><br>
+                                <code>claude --max-turns 5</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>--model</code></td>
+                        <td>Specify AI model</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude --model sonnet</code><br>
+                                <code>claude --model claude-3-5-opus-20241022</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>--dangerously-skip-permissions</code></td>
+                        <td>Skip all permission prompts (use cautiously)</td>
+                        <td><code>claude --dangerously-skip-permissions</code> (only in containers)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Built-in Slash Commands</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Usage Examples</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>/bug</code></td>
+                        <td>Report bugs to Anthropic</td>
+                        <td><code>/bug</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/clear</code></td>
+                        <td>Clear conversation history</td>
+                        <td><code>/clear</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/compact [instructions]</code></td>
+                        <td>Compress conversation with optional focus</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/compact</code><br>
+                                <code>/compact focus on auth changes</code><br>
+                                <code>/compact keep recent edits</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/config</code></td>
+                        <td>View/modify configuration</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/config</code><br>
+                                <code>/config model</code><br>
+                                <code>/config permissions</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/cost</code></td>
+                        <td>Show token usage statistics</td>
+                        <td><code>/cost</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/doctor</code></td>
+                        <td>Check Claude Code installation health</td>
+                        <td><code>/doctor</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/help</code></td>
+                        <td>Get usage help and list commands</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/help</code><br>
+                                <code>/help permissions</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/init</code></td>
+                        <td>Initialize project with CLAUDE.md</td>
+                        <td><code>/init</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/login</code></td>
+                        <td>Switch Anthropic accounts</td>
+                        <td><code>/login</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/logout</code></td>
+                        <td>Sign out from Anthropic account</td>
+                        <td><code>/logout</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/memory</code></td>
+                        <td>Edit CLAUDE.md memory files</td>
+                        <td><code>/memory</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/model</code></td>
+                        <td>Select or change AI model</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/model</code><br>
+                                <code>/model sonnet</code><br>
+                                <code>/model opus</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/permissions</code></td>
+                        <td>View or update tool permissions</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/permissions</code><br>
+                                <code>/permissions allow Write</code><br>
+                                <code>/permissions deny Bash(rm *)</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/review</code></td>
+                        <td>Review code or pull requests</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/review</code><br>
+                                <code>/review PR #123</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/status</code></td>
+                        <td>Show current session status</td>
+                        <td><code>/status</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/vim</code></td>
+                        <td>Enable vim-style editing</td>
+                        <td><code>/vim</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/add-dir</code></td>
+                        <td>Add directories mid-session</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/add-dir ../backend</code><br>
+                                <code>/add-dir /shared/libs</code>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="superclaude-framework">
+            <h2>SuperClaude Framework Commands</h2>
+            
+            <h3>All 16 Slash Commands</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Usage Examples</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>/sc:implement</code></td>
+                        <td>Feature implementation with AI guidance</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:implement user authentication</code><br>
+                                <code>/sc:implement --type component LoginForm</code><br>
+                                <code>/sc:implement payment --with-tests --iterative</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/sc:build</code></td>
+                        <td>Build and compilation</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:build</code><br>
+                                <code>/sc:build --type prod --optimize</code><br>
+                                <code>/sc:build src/ --clean</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/sc:design</code></td>
+                        <td>Design and planning</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:design microservices-migration</code><br>
+                                <code>/sc:design dashboard --persona-architect</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/sc:analyze</code></td>
+                        <td>Multi-dimensional code analysis</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:analyze --focus security</code><br>
+                                <code>/sc:analyze src/ --focus performance</code><br>
+                                <code>/sc:analyze --scope module auth/</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/sc:troubleshoot</code></td>
+                        <td>Problem investigation</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:troubleshoot "login not working"</code><br>
+                                <code>/sc:troubleshoot --logs error.log</code><br>
+                                <code>/sc:troubleshoot performance --focus database</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/sc:explain</code></td>
+                        <td>Educational explanations</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:explain React hooks</code><br>
+                                <code>/sc:explain --persona-mentor async patterns</code><br>
+                                <code>/sc:explain --answer-only JWT tokens</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/sc:improve</code></td>
+                        <td>Code improvement and refactoring</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:improve messy-file.js</code><br>
+                                <code>/sc:improve --safe-mode legacy/</code><br>
+                                <code>/sc:improve --focus accessibility components/</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/sc:test</code></td>
+                        <td>Testing operations</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:test</code><br>
+                                <code>/sc:test --coverage</code><br>
+                                <code>/sc:test --type unit --magic --play</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/sc:cleanup</code></td>
+                        <td>Code cleanup and maintenance</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:cleanup</code><br>
+                                <code>/sc:cleanup --type imports</code><br>
+                                <code>/sc:cleanup legacy/ --preview --validate</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/sc:document</code></td>
+                        <td>Documentation generation</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:document README --type guide</code><br>
+                                <code>/sc:document api/ --format markdown</code><br>
+                                <code>/sc:document --persona-scribe</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/sc:git</code></td>
+                        <td>Git operations</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:git commit --smart-commit</code><br>
+                                <code>/sc:git status</code><br>
+                                <code>/sc:git --interactive</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/sc:estimate</code></td>
+                        <td>Project estimation</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:estimate "redesign auth system"</code><br>
+                                <code>/sc:estimate migration --persona-architect</code><br>
+                                <code>/sc:estimate --type complexity</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/sc:task</code></td>
+                        <td>Task management</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:task create "implement feature"</code><br>
+                                <code>/sc:task list</code><br>
+                                <code>/sc:task complete task-123</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/sc:index</code></td>
+                        <td>Project indexing</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:index</code><br>
+                                <code>/sc:index --deep</code><br>
+                                <code>/sc:index src/</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/sc:load</code></td>
+                        <td>Context loading</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:load --deep --summary</code><br>
+                                <code>/sc:load project-overview</code><br>
+                                <code>/sc:load --focus architecture</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/sc:spawn</code></td>
+                        <td>Sub-agent creation</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:spawn security-expert</code><br>
+                                <code>/sc:spawn --type analyzer code-review</code>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>9 Cognitive Personas</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Persona</th>
+                        <th>Trigger Flag</th>
+                        <th>Auto-Activation Context</th>
+                        <th>Specialization</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>🏗️ architect</td>
+                        <td><code>--persona-architect</code></td>
+                        <td>System design, architecture tasks</td>
+                        <td>Long-term architecture, scalability, system patterns</td>
+                    </tr>
+                    <tr>
+                        <td>🎨 frontend</td>
+                        <td><code>--persona-frontend</code></td>
+                        <td>UI/component work</td>
+                        <td>React/Vue/Angular, accessibility, UI/UX</td>
+                    </tr>
+                    <tr>
+                        <td>⚙️ backend</td>
+                        <td><code>--persona-backend</code></td>
+                        <td>API/server tasks</td>
+                        <td>APIs, databases, server logic, microservices</td>
+                    </tr>
+                    <tr>
+                        <td>🛡️ security</td>
+                        <td><code>--persona-security</code></td>
+                        <td>Security analysis</td>
+                        <td>OWASP, vulnerabilities, threat modeling</td>
+                    </tr>
+                    <tr>
+                        <td>🔍 analyzer</td>
+                        <td><code>--persona-analyzer</code></td>
+                        <td>Debugging, investigation</td>
+                        <td>Root cause analysis, pattern detection</td>
+                    </tr>
+                    <tr>
+                        <td>👨‍🏫 mentor</td>
+                        <td><code>--persona-mentor</code></td>
+                        <td>Educational tasks</td>
+                        <td>Teaching, explanations, best practices</td>
+                    </tr>
+                    <tr>
+                        <td>🔄 refactorer</td>
+                        <td><code>--persona-refactorer</code></td>
+                        <td>Code improvement</td>
+                        <td>Refactoring patterns, code smells</td>
+                    </tr>
+                    <tr>
+                        <td>⚡ performance</td>
+                        <td><code>--persona-performance</code></td>
+                        <td>Optimization tasks</td>
+                        <td>Profiling, caching, query optimization</td>
+                    </tr>
+                    <tr>
+                        <td>✍️ scribe</td>
+                        <td><code>--persona-scribe</code></td>
+                        <td>Documentation</td>
+                        <td>Technical writing, documentation patterns</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="superclaude-cli">
+            <h2>SuperClaude CLI (GitHub Workflow Tool)</h2>
+            
+            <h3>All CLI Commands</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Usage Examples</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>superclaude --verify</code></td>
+                        <td>Check system dependencies</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>superclaude --verify</code><br>
+                                <code>superclaude --verify --verbose</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>superclaude commit</code></td>
+                        <td>Generate AI commit messages</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>superclaude commit</code><br>
+                                <code>superclaude commit --interactive</code><br>
+                                <code>superclaude commit "Add OAuth"</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>superclaude changelog</code></td>
+                        <td>Create smart changelogs</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>superclaude changelog</code><br>
+                                <code>superclaude changelog --verbose</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>superclaude readme</code></td>
+                        <td>Auto-generate README</td>
+                        <td><code>superclaude readme</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>superclaude review</code></td>
+                        <td>AI code review analysis</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>superclaude review</code><br>
+                                <code>superclaude review --verbose</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>superclaude docs</code></td>
+                        <td>Generate technical documentation</td>
+                        <td><code>superclaude docs</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>superclaude brainstorm</code></td>
+                        <td>Feature ideation and suggestions</td>
+                        <td><code>superclaude brainstorm</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>superclaude annotate</code></td>
+                        <td>Add AI notes to git history</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>superclaude annotate</code><br>
+                                <code>superclaude annotate --verbose</code>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="workflows">
+            <h2>Common Workflow Examples</h2>
+            
+            <div class="workflow-section">
+                <h3>Basic Development Workflow</h3>
+                <pre><span class="shell-comment"># Start Claude Code</span>
+<span class="shell-command">claude</span>
+
+<span class="shell-comment"># Load project context</span>
+<span class="shell-command">/init</span>
+
+<span class="shell-comment"># Explore codebase</span>
+<span class="shell-string">"Show me how authentication works"</span>
+
+<span class="shell-comment"># Plan changes</span>
+<span class="shell-string">"Think hard about refactoring the auth module"</span>
+
+<span class="shell-comment"># Implement changes</span>
+<span class="shell-string">"Refactor authentication to use JWT tokens"</span>
+
+<span class="shell-comment"># Test changes</span>
+<span class="shell-command">/sc:test</span> <span class="shell-flag">--coverage</span>
+
+<span class="shell-comment"># Commit with AI message</span>
+<span class="shell-command">superclaude commit</span> <span class="shell-flag">--interactive</span></pre>
+            </div>
+
+            <div class="workflow-section">
+                <h3>Bug Fix Workflow</h3>
+                <pre><span class="shell-comment"># Identify issue</span>
+<span class="shell-command">/sc:troubleshoot</span> <span class="shell-string">"users can't login"</span> <span class="shell-flag">--logs</span> error.log
+
+<span class="shell-comment"># Analyze affected code</span>
+<span class="shell-command">/sc:analyze</span> auth/ <span class="shell-flag">--focus</span> security
+
+<span class="shell-comment"># Fix with validation</span>
+<span class="shell-command">/sc:improve</span> auth.js <span class="shell-flag">--safe-mode</span> <span class="shell-flag">--preview</span>
+
+<span class="shell-comment"># Verify fix</span>
+<span class="shell-command">/sc:test</span> auth/ <span class="shell-flag">--coverage</span>
+
+<span class="shell-comment"># Document changes</span>
+<span class="shell-command">/sc:document</span> <span class="shell-flag">--type</span> changelog</pre>
+            </div>
+
+            <div class="workflow-section">
+                <h3>Feature Implementation Workflow</h3>
+                <pre><span class="shell-comment"># Design phase</span>
+<span class="shell-command">/sc:design</span> <span class="shell-string">"payment processing system"</span> <span class="shell-flag">--persona-architect</span>
+
+<span class="shell-comment"># Estimate effort</span>
+<span class="shell-command">/sc:estimate</span> <span class="shell-string">"payment feature"</span> <span class="shell-flag">--type</span> complexity
+
+<span class="shell-comment"># Implementation</span>
+<span class="shell-command">/sc:implement</span> payment <span class="shell-flag">--type</span> service <span class="shell-flag">--with-tests</span> <span class="shell-flag">--iterative</span>
+
+<span class="shell-comment"># Security review</span>
+<span class="shell-command">/sc:analyze</span> payment/ <span class="shell-flag">--focus</span> security <span class="shell-flag">--persona-security</span>
+
+<span class="shell-comment"># Performance optimization</span>
+<span class="shell-command">/sc:improve</span> payment/ <span class="shell-flag">--focus</span> performance
+
+<span class="shell-comment"># Final documentation</span>
+<span class="shell-command">/sc:document</span> payment/ <span class="shell-flag">--format</span> markdown</pre>
+            </div>
+
+            <div class="workflow-section">
+                <h3>Code Review Workflow</h3>
+                <pre><span class="shell-comment"># Load PR context</span>
+<span class="shell-command">claude</span> <span class="shell-flag">-p</span> <span class="shell-string">"Review PR #123"</span>
+
+<span class="shell-comment"># Deep analysis</span>
+<span class="shell-command">/sc:analyze</span> <span class="shell-flag">--focus</span> quality <span class="shell-flag">--scope</span> project
+
+<span class="shell-comment"># Security check</span>
+<span class="shell-command">/sc:analyze</span> <span class="shell-flag">--focus</span> security <span class="shell-flag">--persona-security</span>
+
+<span class="shell-comment"># Performance review</span>
+<span class="shell-command">/sc:analyze</span> <span class="shell-flag">--focus</span> performance
+
+<span class="shell-comment"># Generate review report</span>
+<span class="shell-command">superclaude review</span> <span class="shell-flag">--verbose</span></pre>
+            </div>
+
+            <div class="workflow-section">
+                <h3>Parallel Development</h3>
+                <pre><span class="shell-comment"># Terminal 1: Frontend</span>
+<span class="shell-command">claude</span> <span class="shell-flag">--add-dir</span> frontend/
+<span class="shell-command">/sc:implement</span> dashboard <span class="shell-flag">--framework</span> react
+
+<span class="shell-comment"># Terminal 2: Backend</span>
+<span class="shell-command">claude</span> <span class="shell-flag">--add-dir</span> backend/
+<span class="shell-command">/sc:implement</span> api <span class="shell-flag">--type</span> api
+
+<span class="shell-comment"># Terminal 3: Testing</span>
+<span class="shell-command">claude</span> <span class="shell-flag">--add-dir</span> tests/
+<span class="shell-command">/sc:test</span> <span class="shell-flag">--type</span> integration</pre>
+            </div>
+        </section>
+
+        <section id="configuration">
+            <h2>Configuration Files</h2>
+            
+            <div class="workflow-section">
+                <h3>Claude Code settings.json</h3>
+                <pre>{
+  <span class="json-key">"model"</span>: <span class="json-string">"claude-3-5-sonnet-20241022"</span>,
+  <span class="json-key">"maxTokens"</span>: <span class="json-number">4096</span>,
+  <span class="json-key">"permissions"</span>: {
+    <span class="json-key">"allowedTools"</span>: [<span class="json-string">"Read"</span>, <span class="json-string">"Write"</span>, <span class="json-string">"Bash(git *)"</span>, <span class="json-string">"Edit"</span>],
+    <span class="json-key">"deny"</span>: [<span class="json-string">"Read(.env)"</span>, <span class="json-string">"Bash(rm *)"</span>, <span class="json-string">"Write(production.*)"</span>]
+  },
+  <span class="json-key">"hooks"</span>: {
+    <span class="json-key">"PostToolUse"</span>: [{
+      <span class="json-key">"matcher"</span>: <span class="json-string">"Write(*.py)"</span>,
+      <span class="json-key">"hooks"</span>: [{
+        <span class="json-key">"type"</span>: <span class="json-string">"command"</span>,
+        <span class="json-key">"command"</span>: <span class="json-string">"python -m black $file"</span>
+      }]
+    }]
+  }
+}</pre>
+            </div>
+
+            <div class="workflow-section">
+                <h3>CLAUDE.md Template</h3>
+                <pre>## Project Context
+- Stack: React, TypeScript, PostgreSQL
+- Architecture: Microservices
+
+## Commands
+- Build: npm run build
+- Test: npm test
+- Deploy: npm run deploy
+
+## Standards
+- Use TypeScript for all new code
+- Minimum 80% test coverage
+- Follow ESLint configuration</pre>
+            </div>
+
+            <div class="workflow-section">
+                <h3>MCP Configuration</h3>
+                <pre>{
+  <span class="json-key">"mcpServers"</span>: {
+    <span class="json-key">"github"</span>: {
+      <span class="json-key">"command"</span>: <span class="json-string">"npx"</span>,
+      <span class="json-key">"args"</span>: [<span class="json-string">"-y"</span>, <span class="json-string">"@modelcontextprotocol/server-github"</span>],
+      <span class="json-key">"env"</span>: {
+        <span class="json-key">"GITHUB_TOKEN"</span>: <span class="json-string">"ghp_your_token"</span>
+      }
+    }
+  }
+}</pre>
+            </div>
+        </section>
+
+        <section id="best-practices">
+            <h2>Best Practices Quick Reference</h2>
+            
+            <div class="workflow-section">
+                <h3>Performance Tips</h3>
+                <ul>
+                    <li>Use <code>/clear</code> regularly to manage context</li>
+                    <li>Enable <code>/compact</code> for long sessions</li>
+                    <li>Use specific file references with <code>@</code></li>
+                    <li>Leverage parallel processing with multiple terminals</li>
+                </ul>
+            </div>
+
+            <div class="workflow-section">
+                <h3>Security Best Practices</h3>
+                <ul>
+                    <li>Never use <code>--dangerously-skip-permissions</code> outside containers</li>
+                    <li>Configure deny lists for sensitive files</li>
+                    <li>Use project-specific CLAUDE.md files</li>
+                    <li>Review <code>/permissions</code> regularly</li>
+                </ul>
+            </div>
+
+            <div class="workflow-section">
+                <h3>Cost Optimization</h3>
+                <ul>
+                    <li>Track usage with <code>/cost</code> command</li>
+                    <li>Use <code>/compact</code> to reduce token usage</li>
+                    <li>Be specific in prompts to reduce iterations</li>
+                    <li>Use SuperClaude's <code>--uc</code> flag for large projects</li>
+                </ul>
+            </div>
+
+            <div class="workflow-section">
+                <h3>Team Collaboration</h3>
+                <ul>
+                    <li>Share <code>.claude/commands/</code> in version control</li>
+                    <li>Standardize CLAUDE.md templates</li>
+                    <li>Use consistent SuperClaude personas</li>
+                    <li>Document custom workflows in README</li>
+                </ul>
+            </div>
+        </section>
+
+        <footer style="text-align: center; padding: 30px 0; color: #666; border-top: 2px solid #e0e0e0; margin-top: 50px;">
+            <p>📚 Claude Code & SuperClaude Complete Reference Guide</p>
+            <p style="font-size: 0.9em;">Comprehensive cheat sheet for AI-powered development workflows</p>
+        </footer>
+    </div>
+</body>
+</html>

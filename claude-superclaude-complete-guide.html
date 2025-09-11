@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude & SuperClaude Ultimate Reference Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        /* Header Navigation */
+        .main-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-title {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-tab:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-tab.active {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .nav-icon {
+            font-size: 1.2rem;
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Reference Guide Styles */
+        .reference-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .reference-container h2 {
+            color: #34495e;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 20px;
+            margin: 30px 0 20px 0;
+            border-radius: 8px;
+            font-size: 1.8rem;
+        }
+
+        .reference-container h3 {
+            color: #2c3e50;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+            margin: 25px 0 15px 0;
+            font-size: 1.4rem;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        /* Code Styles */
+        code {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .code-examples {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.85em;
+            line-height: 1.5;
+        }
+
+        /* Memory Palace Styles */
+        .palace-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .district {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border: 3px solid;
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .district:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .district-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .district-icon {
+            font-size: 2rem;
+        }
+
+        .building {
+            background: rgba(255,255,255,0.8);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid;
+        }
+
+        .building-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: #2C3E50;
+        }
+
+        .room {
+            background: rgba(255,255,255,0.9);
+            padding: 8px 12px;
+            margin: 5px 0;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.3s;
+        }
+
+        .room:hover {
+            background: rgba(255,255,255,1);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* District Colors */
+        .central-hub {
+            border-color: #FFD700;
+            background: linear-gradient(135deg, #FFF8DC 0%, #FFFACD 100%);
+        }
+
+        .command-district {
+            border-color: #4169E1;
+            background: linear-gradient(135deg, #E6F3FF 0%, #DBEAFE 100%);
+        }
+
+        .flag-district {
+            border-color: #32CD32;
+            background: linear-gradient(135deg, #F0FFF0 0%, #E8F5E8 100%);
+        }
+
+        .slash-district {
+            border-color: #FF6347;
+            background: linear-gradient(135deg, #FFF5F5 0%, #FFE4E1 100%);
+        }
+
+        .superclaude-district {
+            border-color: #9370DB;
+            background: linear-gradient(135deg, #F8F0FF 0%, #F0E6FF 100%);
+        }
+
+        .persona-district {
+            border-color: #FF69B4;
+            background: linear-gradient(135deg, #FFF0F5 0%, #FFE4F1 100%);
+        }
+
+        .git-district {
+            border-color: #FFA500;
+            background: linear-gradient(135deg, #FFF8E7 0%, #FFEDCC 100%);
+        }
+
+        /* Interactive Map Styles */
+        .map-container {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            height: 800px;
+            margin: 20px auto;
+            background: linear-gradient(to bottom, 
+                #87CEEB 0%, 
+                #98D8C8 35%, 
+                #B0E0E6 60%, 
+                #F0E68C 85%, 
+                #DEB887 100%);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .district-zone {
+            position: absolute;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .district-zone:hover {
+            transform: scale(1.05);
+            z-index: 10;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        .district-zone.active {
+            transform: scale(1.1);
+            z-index: 20;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(255,255,255,0); }
+            100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+        }
+
+        /* Map District Positions */
+        .map-central-hub {
+            width: 200px;
+            height: 200px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, #FFD700 0%, #FFA500 100%);
+            border: 5px solid #B8860B;
+            z-index: 5;
+        }
+
+        .map-command-district {
+            width: 180px;
+            height: 150px;
+            right: 100px;
+            top: 80px;
+            background: linear-gradient(135deg, #4169E1 0%, #1E90FF 100%);
+            border: 4px solid #191970;
+        }
+
+        .map-flag-district {
+            width: 180px;
+            height: 150px;
+            left: 100px;
+            top: 80px;
+            background: linear-gradient(135deg, #32CD32 0%, #228B22 100%);
+            border: 4px solid #006400;
+        }
+
+        .map-superclaude-district {
+            width: 220px;
+            height: 180px;
+            left: 80px;
+            bottom: 120px;
+            background: linear-gradient(135deg, #9370DB 0%, #8A2BE2 100%);
+            border: 4px solid #4B0082;
+        }
+
+        .map-persona-district {
+            width: 220px;
+            height: 180px;
+            right: 80px;
+            bottom: 120px;
+            background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%);
+            border: 4px solid #C71585;
+        }
+
+        .map-git-district {
+            width: 200px;
+            height: 120px;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #FFA500 0%, #FF8C00 100%);
+            border: 4px solid #D2691E;
+        }
+
+        .district-label {
+            font-size: 1rem;
+            padding: 0 10px;
+        }
+
+        /* Info Panel */
+        .info-panel {
+            position: fixed;
+            right: 20px;
+            top: 180px;
+            width: 300px;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-height: 60vh;
+            overflow-y: auto;
+            display: none;
+            z-index: 999;
+        }
+
+        .info-panel.active {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { 
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to { 
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .close-btn:hover {
+            color: #333;
+        }
+
+        /* Memory Tips */
+        .memory-tip {
+            background: linear-gradient(135deg, #FFFACD 0%, #FFEFD5 100%);
+            border: 2px dashed #FFD700;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #8B7500;
+        }
+
+        .memory-tip-title {
+            font-weight: bold;
+            font-style: normal;
+            margin-bottom: 5px;
+            color: #B8860B;
+        }
+
+        /* Workflow section */
+        .workflow-section {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .workflow-section h3 {
+            color: #2c3e50;
+            border-left: 4px solid #e74c3c;
+            margin-bottom: 20px;
+        }
+
+        pre {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Tour Button */
+        .tour-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            z-index: 900;
+            display: none;
+        }
+
+        .tour-button.visible {
+            display: block;
+        }
+
+        .tour-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 1.5rem;
+            }
+
+            .nav-tabs {
+                gap: 5px;
+            }
+
+            .nav-tab {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+
+            .map-container {
+                height: 600px;
+            }
+
+            .info-panel {
+                width: 90%;
+                right: 5%;
+                left: 5%;
+            }
+
+            table {
+                font-size: 0.85rem;
+            }
+
+            th, td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <h1 class="header-title">🚀 Claude & SuperClaude Ultimate Reference Guide</h1>
+            <nav class="nav-tabs">
+                <button class="nav-tab active" onclick="showSection('reference')">
+                    <span class="nav-icon">📚</span>
+                    <span>Komut Referansı</span>
+                </button>
+                <button class="nav-tab" onclick="showSection('palace')">
+                    <span class="nav-icon">🏰</span>
+                    <span>Zihin Sarayı</span>
+                </button>
+                <button class="nav-tab" onclick="showSection('map')">
+                    <span class="nav-icon">🗺️</span>
+                    <span>İnteraktif Harita</span>
+                </button>
+                <button class="nav-tab" onclick="showSection('workflows')">
+                    <span class="nav-icon">🔄</span>
+                    <span>İş Akışları</span>
+                </button>
+                <button class="nav-tab" onclick="showSection('config')">
+                    <span class="nav-icon">⚙️</span>
+                    <span>Yapılandırma</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Reference Section -->
+    <section id="reference-section" class="content-section active">
+        <div class="reference-container">
+            <h2>Claude Code Tool Commands</h2>
+            
+            <h3>Core CLI Commands</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Usage Examples</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>claude</code></td>
+                        <td>Start interactive REPL session</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude</code><br>
+                                <code>claude "explain this project"</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>claude -p "query"</code></td>
+                        <td>Query via SDK then exit (headless mode)</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude -p "fix the bug in auth.js"</code><br>
+                                <code>claude -p "analyze performance issues"</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>cat file | claude -p</code></td>
+                        <td>Process piped content</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>cat error.log | claude -p "explain these errors"</code><br>
+                                <code>tail -f app.log | claude -p "monitor for issues"</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>claude -c</code></td>
+                        <td>Continue most recent conversation</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude -c</code><br>
+                                <code>claude -c -p "add more tests"</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>claude -r "id" "query"</code></td>
+                        <td>Resume specific session by ID</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude -r "abc123" "finish the PR"</code><br>
+                                <code>claude -r "session-42" "continue refactoring"</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>claude update</code></td>
+                        <td>Update to latest version</td>
+                        <td><code>claude update</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>claude mcp</code></td>
+                        <td>Configure Model Context Protocol servers</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude mcp add github npx @modelcontextprotocol/server-github</code><br>
+                                <code>claude mcp list</code><br>
+                                <code>claude mcp remove github</code>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Built-in Slash Commands</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Usage Examples</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>/init</code></td>
+                        <td>Initialize project with CLAUDE.md</td>
+                        <td><code>/init</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/config</code></td>
+                        <td>View/modify configuration</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/config</code><br>
+                                <code>/config model</code><br>
+                                <code>/config permissions</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/clear</code></td>
+                        <td>Clear conversation history</td>
+                        <td><code>/clear</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/compact</code></td>
+                        <td>Compress conversation with optional focus</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/compact</code><br>
+                                <code>/compact focus on auth changes</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/cost</code></td>
+                        <td>Show token usage statistics</td>
+                        <td><code>/cost</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/doctor</code></td>
+                        <td>Check Claude Code installation health</td>
+                        <td><code>/doctor</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/model</code></td>
+                        <td>Select or change AI model</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/model</code><br>
+                                <code>/model sonnet</code><br>
+                                <code>/model opus</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/permissions</code></td>
+                        <td>View or update tool permissions</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/permissions</code><br>
+                                <code>/permissions allow Write</code><br>
+                                <code>/permissions deny Bash(rm *)</code>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>SuperClaude Framework Commands</h2>
+            
+            <h3>All 16 Slash Commands</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Usage Examples</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>/sc:implement</code></td>
+                        <td>Feature implementation with AI guidance</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:implement user authentication</code><br>
+                                <code>/sc:implement --type component LoginForm</code><br>
+                                <code>/sc:implement payment --with-tests --iterative</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/sc:build</code></td>
+                        <td>Build and compilation</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:build</code><br>
+                                <code>/sc:build --type prod --optimize</code><br>
+                                <code>/sc:build src/ --clean</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/sc:design</code></td>
+                        <td>Design and planning</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:design microservices-migration</code><br>
+                                <code>/sc:design dashboard --persona-architect</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/sc:analyze</code></td>
+                        <td>Multi-dimensional code analysis</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:analyze --focus security</code><br>
+                                <code>/sc:analyze src/ --focus performance</code><br>
+                                <code>/sc:analyze --scope module auth/</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/sc:test</code></td>
+                        <td>Testing operations</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:test</code><br>
+                                <code>/sc:test --coverage</code><br>
+                                <code>/sc:test --type unit --magic --play</code>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Memory Palace Section -->
+    <section id="palace-section" class="content-section">
+        <div class="palace-container">
+            <div class="memory-tip">
+                <div class="memory-tip-title">🧠 Zihin Sarayı Yöntemi:</div>
+                Bu şehirde yürüdüğünüzü hayal edin. Her bölge farklı bir renk ve tema ile aklınızda kalacak. 
+                Merkez Meydandan başlayıp, saat yönünde bölgeleri dolaşın.
+            </div>
+
+            <!-- Central Hub - Merkez Meydan -->
+            <div class="district central-hub">
+                <div class="district-title">
+                    <span class="district-icon">🏛️</span>
+                    MERKEZ MEYDAN - Ana Giriş Kapısı
+                </div>
+                <div class="building" style="border-color: #FFD700;">
+                    <div class="building-name">🚪 Ana Giriş Binası</div>
+                    <div class="room">
+                        <span class="room-icon">🎯</span>
+                        <span class="room-name">claude</span>
+                        <span class="room-description">Ana kapı - Şehre giriş</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">📝</span>
+                        <span class="room-name">claude -p</span>
+                        <span class="room-description">Hızlı ziyaret ofisi</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🔄</span>
+                        <span class="room-name">claude -c</span>
+                        <span class="room-description">Devam eden işler masası</span>
+                    </div>
+                </div>
+                <div class="building" style="border-color: #FFD700;">
+                    <div class="building-name">📚 Arşiv Binası</div>
+                    <div class="room">
+                        <span class="room-icon">🗂️</span>
+                        <span class="room-name">claude -r "id"</span>
+                        <span class="room-description">Eski dosyalar arşivi</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🔄</span>
+                        <span class="room-name">claude update</span>
+                        <span class="room-description">Güncelleme merkezi</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Command District - Komut Mahallesi -->
+            <div class="district command-district">
+                <div class="district-title">
+                    <span class="district-icon">🏘️</span>
+                    KOMUT MAHALLESİ - Temel İşlemler
+                </div>
+                <div class="building" style="border-color: #4169E1;">
+                    <div class="building-name">🏢 Yönetim Binası</div>
+                    <div class="room">
+                        <span class="room-icon">🗺️</span>
+                        <span class="room-name">/init</span>
+                        <span class="room-description">Şehir planlama ofisi</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">⚙️</span>
+                        <span class="room-name">/config</span>
+                        <span class="room-description">Belediye ayarları</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🔑</span>
+                        <span class="room-name">/permissions</span>
+                        <span class="room-description">İzin ve ruhsat dairesi</span>
+                    </div>
+                </div>
+                <div class="building" style="border-color: #4169E1;">
+                    <div class="building-name">🏥 Bakım Merkezi</div>
+                    <div class="room">
+                        <span class="room-icon">🩺</span>
+                        <span class="room-name">/doctor</span>
+                        <span class="room-description">Sağlık kontrol kliniği</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🧹</span>
+                        <span class="room-name">/clear</span>
+                        <span class="room-description">Temizlik hizmetleri</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">📦</span>
+                        <span class="room-name">/compact</span>
+                        <span class="room-description">Sıkıştırma deposu</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SuperClaude District -->
+            <div class="district superclaude-district">
+                <div class="district-title">
+                    <span class="district-icon">⚡</span>
+                    SÜPER BÖLGE - SuperClaude Komutları
+                </div>
+                <div class="building" style="border-color: #9370DB;">
+                    <div class="building-name">🏭 Üretim Fabrikası</div>
+                    <div class="room">
+                        <span class="room-icon">🔨</span>
+                        <span class="room-name">/sc:implement</span>
+                        <span class="room-description">Uygulama atölyesi</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🏗️</span>
+                        <span class="room-name">/sc:build</span>
+                        <span class="room-description">İnşaat sahası</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">📐</span>
+                        <span class="room-name">/sc:design</span>
+                        <span class="room-description">Tasarım stüdyosu</span>
+                    </div>
+                </div>
+                <div class="building" style="border-color: #9370DB;">
+                    <div class="building-name">🔬 Analiz Laboratuvarı</div>
+                    <div class="room">
+                        <span class="room-icon">🔍</span>
+                        <span class="room-name">/sc:analyze</span>
+                        <span class="room-description">Analiz laboratuvarı</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🔧</span>
+                        <span class="room-name">/sc:troubleshoot</span>
+                        <span class="room-description">Sorun giderme merkezi</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">💊</span>
+                        <span class="room-name">/sc:improve</span>
+                        <span class="room-description">İyileştirme kliniği</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Persona District -->
+            <div class="district persona-district">
+                <div class="district-title">
+                    <span class="district-icon">🎭</span>
+                    KARAKTER MAHALLESİ - 9 Persona
+                </div>
+                <div class="building" style="border-color: #FF69B4;">
+                    <div class="building-name">🎪 Karakter Tiyatrosu</div>
+                    <div class="room">
+                        <span class="room-icon">🏗️</span>
+                        <span class="room-name">architect</span>
+                        <span class="room-description">Mimar - Sistem tasarımı</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🎨</span>
+                        <span class="room-name">frontend</span>
+                        <span class="room-description">Sanatçı - UI/UX</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">⚙️</span>
+                        <span class="room-name">backend</span>
+                        <span class="room-description">Mühendis - Server</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="memory-tip">
+                <div class="memory-tip-title">💡 Hatırlama İpuçları:</div>
+                <ul>
+                    <li><strong>Merkez Meydan (Altın):</strong> Altın kapılar - En değerli başlangıç komutları</li>
+                    <li><strong>Komut Mahallesi (Mavi):</strong> Deniz gibi temiz ve düzenli - Temel slash komutları</li>
+                    <li><strong>Süper Bölge (Mor):</strong> Kraliyet rengi - Güçlü SuperClaude komutları</li>
+                    <li><strong>Karakter Mahallesi (Pembe):</strong> Tiyatro perdesi - 9 farklı rol</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Map Section -->
+    <section id="map-section" class="content-section">
+        <div class="map-container">
+            <!-- Districts on Map -->
+            <div class="district-zone map-central-hub" data-district="central">
+                <div class="district-icon">🏛️</div>
+                <div class="district-label">MERKEZ MEYDAN<br>Ana Giriş</div>
+            </div>
+            
+            <div class="district-zone map-command-district" data-district="command">
+                <div class="district-icon">🏘️</div>
+                <div class="district-label">KOMUT<br>MAHALLESİ</div>
+            </div>
+            
+            <div class="district-zone map-flag-district" data-district="flag">
+                <div class="district-icon">🚩</div>
+                <div class="district-label">BAYRAK<br>TEPESİ</div>
+            </div>
+            
+            <div class="district-zone map-superclaude-district" data-district="superclaude">
+                <div class="district-icon">⚡</div>
+                <div class="district-label">SÜPER BÖLGE<br>SuperClaude</div>
+            </div>
+            
+            <div class="district-zone map-persona-district" data-district="persona">
+                <div class="district-icon">🎭</div>
+                <div class="district-label">KARAKTER<br>MAHALLESİ</div>
+            </div>
+            
+            <div class="district-zone map-git-district" data-district="git">
+                <div class="district-icon">📦</div>
+                <div class="district-label">GIT LİMANI</div>
+            </div>
+        </div>
+
+        <!-- Tour Button for Map -->
+        <button class="tour-button visible" onclick="startTour()">🎯 Rehberli Tur Başlat</button>
+
+        <!-- Info Panel -->
+        <div class="info-panel" id="infoPanel">
+            <button class="close-btn" onclick="closeInfoPanel()">×</button>
+            <div class="info-title" id="infoTitle"></div>
+            <div class="info-content" id="infoContent"></div>
+        </div>
+    </section>
+
+    <!-- Workflows Section -->
+    <section id="workflows-section" class="content-section">
+        <div class="reference-container">
+            <h2>Common Workflow Examples</h2>
+            
+            <div class="workflow-section">
+                <h3>Basic Development Workflow</h3>
+                <pre># Start Claude Code
+claude
+
+# Load project context
+/init
+
+# Explore codebase
+"Show me how authentication works"
+
+# Plan changes
+"Think hard about refactoring the auth module"
+
+# Implement changes
+"Refactor authentication to use JWT tokens"
+
+# Test changes
+/sc:test --coverage
+
+# Commit with AI message
+superclaude commit --interactive</pre>
+            </div>
+
+            <div class="workflow-section">
+                <h3>Bug Fix Workflow</h3>
+                <pre># Identify issue
+/sc:troubleshoot "users can't login" --logs error.log
+
+# Analyze affected code
+/sc:analyze auth/ --focus security
+
+# Fix with validation
+/sc:improve auth.js --safe-mode --preview
+
+# Verify fix
+/sc:test auth/ --coverage
+
+# Document changes
+/sc:document --type changelog</pre>
+            </div>
+
+            <div class="workflow-section">
+                <h3>Feature Implementation Workflow</h3>
+                <pre># Design phase
+/sc:design "payment processing system" --persona-architect
+
+# Estimate effort
+/sc:estimate "payment feature" --type complexity
+
+# Implementation
+/sc:implement payment --type service --with-tests --iterative
+
+# Security review
+/sc:analyze payment/ --focus security --persona-security
+
+# Performance optimization
+/sc:improve payment/ --focus performance
+
+# Final documentation
+/sc:document payment/ --format markdown</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Configuration Section -->
+    <section id="config-section" class="content-section">
+        <div class="reference-container">
+            <h2>Configuration Files</h2>
+            
+            <div class="workflow-section">
+                <h3>Claude Code settings.json</h3>
+                <pre>{
+  "model": "claude-3-5-sonnet-20241022",
+  "maxTokens": 4096,
+  "permissions": {
+    "allowedTools": ["Read", "Write", "Bash(git *)", "Edit"],
+    "deny": ["Read(.env)", "Bash(rm *)", "Write(production.*)"]
+  },
+  "hooks": {
+    "PostToolUse": [{
+      "matcher": "Write(*.py)",
+      "hooks": [{
+        "type": "command",
+        "command": "python -m black $file"
+      }]
+    }]
+  }
+}</pre>
+            </div>
+
+            <div class="workflow-section">
+                <h3>CLAUDE.md Template</h3>
+                <pre>## Project Context
+- Stack: React, TypeScript, PostgreSQL
+- Architecture: Microservices
+
+## Commands
+- Build: npm run build
+- Test: npm test
+- Deploy: npm run deploy
+
+## Standards
+- Use TypeScript for all new code
+- Minimum 80% test coverage
+- Follow ESLint configuration</pre>
+            </div>
+
+            <div class="workflow-section">
+                <h3>MCP Configuration</h3>
+                <pre>{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_TOKEN": "ghp_your_token"
+      }
+    }
+  }
+}</pre>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Section Navigation
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionName + '-section').classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.closest('.nav-tab').classList.add('active');
+            
+            // Show/hide tour button based on section
+            const tourButton = document.querySelector('.tour-button');
+            if (sectionName === 'map') {
+                tourButton.classList.add('visible');
+            } else {
+                tourButton.classList.remove('visible');
+            }
+        }
+
+        // District Data for Interactive Map
+        const districts = {
+            central: {
+                title: '🏛️ Merkez Meydan',
+                description: 'Şehrin kalbi, tüm yolların başladığı nokta. Claude\'un ana komutları burada.',
+                commands: [
+                    { name: 'claude', desc: 'Ana giriş kapısı - REPL oturumu başlatır' },
+                    { name: 'claude -p "query"', desc: 'Hızlı ziyaret ofisi - Tek soru sor ve çık' },
+                    { name: 'claude -c', desc: 'Devam masası - Son konuşmaya devam et' },
+                    { name: 'claude -r "id"', desc: 'Arşiv odası - Eski oturumu devam ettir' },
+                    { name: 'claude update', desc: 'Güncelleme merkezi - En son versiyona güncelle' },
+                    { name: 'claude mcp', desc: 'Protokol ofisi - MCP sunucularını yönet' }
+                ],
+                color: '#FFD700'
+            },
+            command: {
+                title: '🏘️ Komut Mahallesi',
+                description: 'Günlük işlerin yapıldığı mahalle. Slash (/) ile başlayan tüm temel komutlar.',
+                commands: [
+                    { name: '/init', desc: 'Şehir planlama - Proje başlatma' },
+                    { name: '/config', desc: 'Belediye binası - Yapılandırma ayarları' },
+                    { name: '/permissions', desc: 'Ruhsat dairesi - İzin yönetimi' },
+                    { name: '/doctor', desc: 'Sağlık merkezi - Sistem kontrolü' },
+                    { name: '/clear', desc: 'Temizlik hizmetleri - Geçmişi temizle' },
+                    { name: '/compact', desc: 'Sıkıştırma deposu - Konuşmayı sıkıştır' },
+                    { name: '/cost', desc: 'Muhasebe - Token kullanımı' },
+                    { name: '/model', desc: 'Model galerisi - AI modeli seç' }
+                ],
+                color: '#4169E1'
+            },
+            flag: {
+                title: '🚩 Bayrak Tepesi',
+                description: 'Özel ayarların dalgalandığı tepe. Tüm -- bayrakları burada.',
+                commands: [
+                    { name: '--add-dir', desc: 'Yeni mahalle ekleme - Dizin ekle' },
+                    { name: '--allowedTools', desc: 'İzinli araçlar - Beyaz liste' },
+                    { name: '--disallowedTools', desc: 'Yasaklı araçlar - Kara liste' },
+                    { name: '--print / -p', desc: 'Matbaa - Yazdır ve çık' },
+                    { name: '--output-format', desc: 'Format atölyesi - Çıktı formatı' },
+                    { name: '--verbose', desc: 'Anons sistemi - Detaylı log' }
+                ],
+                color: '#32CD32'
+            },
+            superclaude: {
+                title: '⚡ Süper Bölge',
+                description: 'Güçlü SuperClaude komutlarının üretildiği endüstri bölgesi.',
+                commands: [
+                    { name: '/sc:implement', desc: 'Uygulama fabrikası - Özellik geliştirme' },
+                    { name: '/sc:build', desc: 'İnşaat sahası - Derleme ve yapım' },
+                    { name: '/sc:design', desc: 'Tasarım stüdyosu - Planlama' },
+                    { name: '/sc:analyze', desc: 'Analiz laboratuvarı - Kod analizi' },
+                    { name: '/sc:troubleshoot', desc: 'Sorun giderme - Hata ayıklama' },
+                    { name: '/sc:test', desc: 'Test merkezi - Birim testleri' }
+                ],
+                color: '#9370DB'
+            },
+            persona: {
+                title: '🎭 Karakter Mahallesi',
+                description: '9 farklı uzman karakterin yaşadığı sanat mahallesi.',
+                commands: [
+                    { name: '🏗️ architect', desc: 'Mimar - Sistem tasarımı uzmanı' },
+                    { name: '🎨 frontend', desc: 'Sanatçı - UI/UX tasarımcı' },
+                    { name: '⚙️ backend', desc: 'Mühendis - Sunucu uzmanı' },
+                    { name: '🛡️ security', desc: 'Güvenlik şefi - OWASP uzmanı' },
+                    { name: '🔍 analyzer', desc: 'Dedektif - Hata bulma uzmanı' },
+                    { name: '⚡ performance', desc: 'Hız ustası - Optimizasyon uzmanı' }
+                ],
+                color: '#FF69B4'
+            },
+            git: {
+                title: '📦 Git Limanı',
+                description: 'Kod gemilerinin yanaştığı liman. Versiyon kontrol komutları.',
+                commands: [
+                    { name: 'superclaude commit', desc: 'Kargo kayıt - AI commit mesajı' },
+                    { name: 'superclaude changelog', desc: 'Gemi günlüğü - Değişiklik kaydı' },
+                    { name: 'superclaude review', desc: 'Gümrük kontrolü - Kod inceleme' },
+                    { name: 'superclaude readme', desc: 'Kullanım kılavuzu - README oluştur' }
+                ],
+                color: '#FFA500'
+            }
+        };
+        
+        // District click handlers for interactive map
+        document.querySelectorAll('.district-zone').forEach(zone => {
+            zone.addEventListener('click', function() {
+                const districtKey = this.dataset.district;
+                showDistrictInfo(districtKey);
+                
+                // Remove active class from all zones
+                document.querySelectorAll('.district-zone').forEach(z => z.classList.remove('active'));
+                // Add active class to clicked zone
+                this.classList.add('active');
+            });
+        });
+        
+        function showDistrictInfo(districtKey) {
+            const district = districts[districtKey];
+            const panel = document.getElementById('infoPanel');
+            const title = document.getElementById('infoTitle');
+            const content = document.getElementById('infoContent');
+            
+            title.innerHTML = district.title;
+            
+            let contentHTML = `<p style="margin-bottom: 15px; color: #666;">${district.description}</p>`;
+            contentHTML += '<ul class="command-list" style="list-style: none; margin: 0; padding: 0;">';
+            
+            district.commands.forEach(cmd => {
+                contentHTML += `
+                    <li style="background: #f8f9fa; padding: 10px; margin: 8px 0; border-radius: 8px; border-left: 4px solid ${district.color};">
+                        <div style="font-weight: bold; color: #2c3e50; font-family: 'Courier New', monospace;">${cmd.name}</div>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 5px;">${cmd.desc}</div>
+                    </li>
+                `;
+            });
+            
+            contentHTML += '</ul>';
+            content.innerHTML = contentHTML;
+            
+            panel.classList.add('active');
+        }
+        
+        function closeInfoPanel() {
+            document.getElementById('infoPanel').classList.remove('active');
+            document.querySelectorAll('.district-zone').forEach(z => z.classList.remove('active'));
+        }
+        
+        // Tour functionality
+        let tourIndex = 0;
+        const tourOrder = ['central', 'command', 'flag', 'superclaude', 'persona', 'git'];
+        
+        function startTour() {
+            tourIndex = 0;
+            nextTourStop();
+        }
+        
+        function nextTourStop() {
+            if (tourIndex < tourOrder.length) {
+                const districtKey = tourOrder[tourIndex];
+                const zone = document.querySelector(`[data-district="${districtKey}"]`);
+                
+                // Trigger click on the zone
+                zone.click();
+                
+                // Scroll to zone
+                zone.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                tourIndex++;
+                
+                // Continue tour after 5 seconds
+                if (tourIndex < tourOrder.length) {
+                    setTimeout(nextTourStop, 5000);
+                }
+            }
+        }
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeInfoPanel();
+            }
+            
+            // Number keys for section navigation
+            const numberKeys = {
+                '1': 'reference',
+                '2': 'palace',
+                '3': 'map',
+                '4': 'workflows',
+                '5': 'config'
+            };
+            
+            if (e.ctrlKey && numberKeys[e.key]) {
+                const tabs = document.querySelectorAll('.nav-tab');
+                const index = parseInt(e.key) - 1;
+                if (tabs[index]) {
+                    tabs[index].click();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

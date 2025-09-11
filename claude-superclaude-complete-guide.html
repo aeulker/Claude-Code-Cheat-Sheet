@@ -553,263 +553,27 @@
         <div class="header-container">
             <h1 class="header-title">🚀 Claude & SuperClaude Ultimate Reference Guide</h1>
             <nav class="nav-tabs">
-                <button class="nav-tab active" onclick="showSection('reference')">
-                    <span class="nav-icon">📚</span>
-                    <span>Komut Referansı</span>
-                </button>
-                <button class="nav-tab" onclick="showSection('palace')">
+
+                <button class="nav-tab active" onclick="showSection('palace')">
                     <span class="nav-icon">🏰</span>
                     <span>Zihin Sarayı</span>
                 </button>
                 <button class="nav-tab" onclick="showSection('map')">
                     <span class="nav-icon">🗺️</span>
                     <span>İnteraktif Harita</span>
-                </button>
-                <button class="nav-tab" onclick="showSection('workflows')">
-                    <span class="nav-icon">🔄</span>
-                    <span>İş Akışları</span>
-                </button>
-                <button class="nav-tab" onclick="showSection('config')">
-                    <span class="nav-icon">⚙️</span>
-                    <span>Yapılandırma</span>
-                </button>
+                </button>    
+                <button class="nav-tab" onclick="showSection('reference')">
+                    <span class="nav-icon">📚</span>
+                    <span>Komut Referansı</span>
+                </button>				
             </nav>
         </div>
     </header>
 
-    <!-- Reference Section -->
-    <section id="reference-section" class="content-section active">
-        <div class="reference-container">
-            <h2>Claude Code Tool Commands</h2>
-            
-            <h3>Core CLI Commands</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Command</th>
-                        <th>Description</th>
-                        <th>Usage Examples</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><code>claude</code></td>
-                        <td>Start interactive REPL session</td>
-                        <td>
-                            <div class="code-examples">
-                                <code>claude</code><br>
-                                <code>claude "explain this project"</code>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><code>claude -p "query"</code></td>
-                        <td>Query via SDK then exit (headless mode)</td>
-                        <td>
-                            <div class="code-examples">
-                                <code>claude -p "fix the bug in auth.js"</code><br>
-                                <code>claude -p "analyze performance issues"</code>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><code>cat file | claude -p</code></td>
-                        <td>Process piped content</td>
-                        <td>
-                            <div class="code-examples">
-                                <code>cat error.log | claude -p "explain these errors"</code><br>
-                                <code>tail -f app.log | claude -p "monitor for issues"</code>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><code>claude -c</code></td>
-                        <td>Continue most recent conversation</td>
-                        <td>
-                            <div class="code-examples">
-                                <code>claude -c</code><br>
-                                <code>claude -c -p "add more tests"</code>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><code>claude -r "id" "query"</code></td>
-                        <td>Resume specific session by ID</td>
-                        <td>
-                            <div class="code-examples">
-                                <code>claude -r "abc123" "finish the PR"</code><br>
-                                <code>claude -r "session-42" "continue refactoring"</code>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><code>claude update</code></td>
-                        <td>Update to latest version</td>
-                        <td><code>claude update</code></td>
-                    </tr>
-                    <tr>
-                        <td><code>claude mcp</code></td>
-                        <td>Configure Model Context Protocol servers</td>
-                        <td>
-                            <div class="code-examples">
-                                <code>claude mcp add github npx @modelcontextprotocol/server-github</code><br>
-                                <code>claude mcp list</code><br>
-                                <code>claude mcp remove github</code>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h3>Built-in Slash Commands</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Command</th>
-                        <th>Description</th>
-                        <th>Usage Examples</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><code>/init</code></td>
-                        <td>Initialize project with CLAUDE.md</td>
-                        <td><code>/init</code></td>
-                    </tr>
-                    <tr>
-                        <td><code>/config</code></td>
-                        <td>View/modify configuration</td>
-                        <td>
-                            <div class="code-examples">
-                                <code>/config</code><br>
-                                <code>/config model</code><br>
-                                <code>/config permissions</code>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><code>/clear</code></td>
-                        <td>Clear conversation history</td>
-                        <td><code>/clear</code></td>
-                    </tr>
-                    <tr>
-                        <td><code>/compact</code></td>
-                        <td>Compress conversation with optional focus</td>
-                        <td>
-                            <div class="code-examples">
-                                <code>/compact</code><br>
-                                <code>/compact focus on auth changes</code>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><code>/cost</code></td>
-                        <td>Show token usage statistics</td>
-                        <td><code>/cost</code></td>
-                    </tr>
-                    <tr>
-                        <td><code>/doctor</code></td>
-                        <td>Check Claude Code installation health</td>
-                        <td><code>/doctor</code></td>
-                    </tr>
-                    <tr>
-                        <td><code>/model</code></td>
-                        <td>Select or change AI model</td>
-                        <td>
-                            <div class="code-examples">
-                                <code>/model</code><br>
-                                <code>/model sonnet</code><br>
-                                <code>/model opus</code>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><code>/permissions</code></td>
-                        <td>View or update tool permissions</td>
-                        <td>
-                            <div class="code-examples">
-                                <code>/permissions</code><br>
-                                <code>/permissions allow Write</code><br>
-                                <code>/permissions deny Bash(rm *)</code>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h2>SuperClaude Framework Commands</h2>
-            
-            <h3>All 16 Slash Commands</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Command</th>
-                        <th>Description</th>
-                        <th>Usage Examples</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><code>/sc:implement</code></td>
-                        <td>Feature implementation with AI guidance</td>
-                        <td>
-                            <div class="code-examples">
-                                <code>/sc:implement user authentication</code><br>
-                                <code>/sc:implement --type component LoginForm</code><br>
-                                <code>/sc:implement payment --with-tests --iterative</code>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><code>/sc:build</code></td>
-                        <td>Build and compilation</td>
-                        <td>
-                            <div class="code-examples">
-                                <code>/sc:build</code><br>
-                                <code>/sc:build --type prod --optimize</code><br>
-                                <code>/sc:build src/ --clean</code>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><code>/sc:design</code></td>
-                        <td>Design and planning</td>
-                        <td>
-                            <div class="code-examples">
-                                <code>/sc:design microservices-migration</code><br>
-                                <code>/sc:design dashboard --persona-architect</code>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><code>/sc:analyze</code></td>
-                        <td>Multi-dimensional code analysis</td>
-                        <td>
-                            <div class="code-examples">
-                                <code>/sc:analyze --focus security</code><br>
-                                <code>/sc:analyze src/ --focus performance</code><br>
-                                <code>/sc:analyze --scope module auth/</code>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><code>/sc:test</code></td>
-                        <td>Testing operations</td>
-                        <td>
-                            <div class="code-examples">
-                                <code>/sc:test</code><br>
-                                <code>/sc:test --coverage</code><br>
-                                <code>/sc:test --type unit --magic --play</code>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
+    
 
     <!-- Memory Palace Section -->
-    <section id="palace-section" class="content-section">
+    <section id="palace-section" class="content-section active">
         <div class="palace-container">
             <div class="memory-tip">
                 <div class="memory-tip-title">🧠 Zihin Sarayı Yöntemi:</div>
@@ -1028,135 +792,7 @@
         </div>
     </section>
 
-    <!-- Workflows Section -->
-    <section id="workflows-section" class="content-section">
-        <div class="reference-container">
-            <h2>Common Workflow Examples</h2>
-            
-            <div class="workflow-section">
-                <h3>Basic Development Workflow</h3>
-                <pre># Start Claude Code
-claude
-
-# Load project context
-/init
-
-# Explore codebase
-"Show me how authentication works"
-
-# Plan changes
-"Think hard about refactoring the auth module"
-
-# Implement changes
-"Refactor authentication to use JWT tokens"
-
-# Test changes
-/sc:test --coverage
-
-# Commit with AI message
-superclaude commit --interactive</pre>
-            </div>
-
-            <div class="workflow-section">
-                <h3>Bug Fix Workflow</h3>
-                <pre># Identify issue
-/sc:troubleshoot "users can't login" --logs error.log
-
-# Analyze affected code
-/sc:analyze auth/ --focus security
-
-# Fix with validation
-/sc:improve auth.js --safe-mode --preview
-
-# Verify fix
-/sc:test auth/ --coverage
-
-# Document changes
-/sc:document --type changelog</pre>
-            </div>
-
-            <div class="workflow-section">
-                <h3>Feature Implementation Workflow</h3>
-                <pre># Design phase
-/sc:design "payment processing system" --persona-architect
-
-# Estimate effort
-/sc:estimate "payment feature" --type complexity
-
-# Implementation
-/sc:implement payment --type service --with-tests --iterative
-
-# Security review
-/sc:analyze payment/ --focus security --persona-security
-
-# Performance optimization
-/sc:improve payment/ --focus performance
-
-# Final documentation
-/sc:document payment/ --format markdown</pre>
-            </div>
-        </div>
-    </section>
-
-    <!-- Configuration Section -->
-    <section id="config-section" class="content-section">
-        <div class="reference-container">
-            <h2>Configuration Files</h2>
-            
-            <div class="workflow-section">
-                <h3>Claude Code settings.json</h3>
-                <pre>{
-  "model": "claude-3-5-sonnet-20241022",
-  "maxTokens": 4096,
-  "permissions": {
-    "allowedTools": ["Read", "Write", "Bash(git *)", "Edit"],
-    "deny": ["Read(.env)", "Bash(rm *)", "Write(production.*)"]
-  },
-  "hooks": {
-    "PostToolUse": [{
-      "matcher": "Write(*.py)",
-      "hooks": [{
-        "type": "command",
-        "command": "python -m black $file"
-      }]
-    }]
-  }
-}</pre>
-            </div>
-
-            <div class="workflow-section">
-                <h3>CLAUDE.md Template</h3>
-                <pre>## Project Context
-- Stack: React, TypeScript, PostgreSQL
-- Architecture: Microservices
-
-## Commands
-- Build: npm run build
-- Test: npm test
-- Deploy: npm run deploy
-
-## Standards
-- Use TypeScript for all new code
-- Minimum 80% test coverage
-- Follow ESLint configuration</pre>
-            </div>
-
-            <div class="workflow-section">
-                <h3>MCP Configuration</h3>
-                <pre>{
-  "mcpServers": {
-    "github": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-github"],
-      "env": {
-        "GITHUB_TOKEN": "ghp_your_token"
-      }
-    }
-  }
-}</pre>
-            </div>
-        </div>
-    </section>
+   
 
     <script>
         // Section Navigation
@@ -1170,20 +806,27 @@ superclaude commit --interactive</pre>
             document.querySelectorAll('.nav-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
-            
-            // Show selected section
-            document.getElementById(sectionName + '-section').classList.add('active');
-            
-            // Add active class to clicked tab
-            event.target.closest('.nav-tab').classList.add('active');
-            
-            // Show/hide tour button based on section
-            const tourButton = document.querySelector('.tour-button');
-            if (sectionName === 'map') {
-                tourButton.classList.add('visible');
-            } else {
-                tourButton.classList.remove('visible');
-            }
+            			
+			if(sectionName=='reference')
+			{
+				window.location.href='index.html';
+			}
+			else
+			{
+				// Show selected section
+				document.getElementById(sectionName + '-section').classList.add('active');
+				
+				// Add active class to clicked tab
+				event.target.closest('.nav-tab').classList.add('active');
+				
+				// Show/hide tour button based on section
+				const tourButton = document.querySelector('.tour-button');
+				if (sectionName === 'map') {
+					tourButton.classList.add('visible');
+				} else {
+					tourButton.classList.remove('visible');
+				}
+			}
         }
 
         // District Data for Interactive Map
@@ -1351,9 +994,7 @@ superclaude commit --interactive</pre>
             const numberKeys = {
                 '1': 'reference',
                 '2': 'palace',
-                '3': 'map',
-                '4': 'workflows',
-                '5': 'config'
+                '3': 'map'
             };
             
             if (e.ctrlKey && numberKeys[e.key]) {

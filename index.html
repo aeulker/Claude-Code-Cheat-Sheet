@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,8 +14,10 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: #f5f5f5;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            scroll-behavior: smooth;
         }
 
         .container {
@@ -26,10 +28,29 @@
 
         h1 {
             color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             border-bottom: 4px solid #3498db;
-            padding-bottom: 15px;
-            margin-bottom: 30px;
-            font-size: 2.5rem;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-weight: 700;
+            text-align: center;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #e74c3c);
+            border-radius: 2px;
         }
 
         h2 {
@@ -61,11 +82,18 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
+            margin: 30px 0;
             background: white;
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        table:hover {
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
         }
 
         thead {
@@ -222,32 +250,120 @@
             margin: 8px 0;
         }
 
+        /* Enhanced Loading Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container > * {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .container > *:nth-child(2) { animation-delay: 0.1s; }
+        .container > *:nth-child(3) { animation-delay: 0.2s; }
+        .container > *:nth-child(4) { animation-delay: 0.3s; }
+
+        /* Enhanced Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus indicators for better keyboard navigation */
+        nav a:focus,
+        table:focus {
+            outline: 3px solid #667eea;
+            outline-offset: 2px;
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            body {
+                background: white;
+                color: black;
+            }
+            
+            h1, h2 {
+                background: black;
+                color: white;
+            }
+            
+            code, .code-examples {
+                background: black;
+                color: white;
+            }
+        }
+
         /* Responsive */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 15px;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 10px;
             }
 
-            h1 {
-                font-size: 1.8rem;
-            }
-
             h2 {
-                font-size: 1.4rem;
-                padding: 10px 15px;
+                padding: 15px 20px;
             }
 
             table {
                 font-size: 0.85rem;
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
             }
 
             th, td {
-                padding: 8px;
+                padding: 12px 10px;
+                min-width: 120px;
             }
 
             nav ul {
                 flex-direction: column;
                 gap: 10px;
+            }
+
+            nav a {
+                display: block;
+                text-align: center;
+            }
+
+            .code-examples {
+                font-size: 0.8em;
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h2 {
+                padding: 12px 15px;
+            }
+
+            th, td {
+                padding: 10px 8px;
+                font-size: 0.8rem;
+            }
+
+            .code-examples {
+                padding: 12px;
             }
         }
 
@@ -279,7 +395,7 @@
                 <li><a href="#workflows">Workflows</a></li>
                 <li><a href="#configuration">Configuration</a></li>
                 <li><a href="#best-practices">Best Practices</a></li>
-				<li><a href="claude-superclaude-complete-guide.html">Mind Map</a></li>
+                <li><a href="claude-superclaude-complete-guide.html">🧠 Interactive Memory Palace</a></li>
             </ul>
         </nav>
 
@@ -290,9 +406,9 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Command</th>
-                        <th>Description</th>
-                        <th>Usage Examples</th>
+                        <th scope="col">Command</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Usage Examples</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -369,9 +485,9 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Flag</th>
-                        <th>Description</th>
-                        <th>Usage Examples</th>
+                        <th scope="col">Flag</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Usage Examples</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -467,9 +583,9 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Command</th>
-                        <th>Description</th>
-                        <th>Usage Examples</th>
+                        <th scope="col">Command</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Usage Examples</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -597,6 +713,193 @@
                             </div>
                         </td>
                     </tr>
+                    <tr>
+                        <td><code>/ui</code> / <code>/21</code></td>
+                        <td>Generate UI components using 21st.dev patterns</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/ui login form</code><br>
+                                <code>/21 responsive navbar</code><br>
+                                <code>/ui data table --accessible</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/logo</code></td>
+                        <td>Search and insert company logos</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/logo GitHub</code><br>
+                                <code>/logo Discord --format TSX</code>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>MCP Server Integration</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">MCP Server</th>
+                        <th scope="col">Purpose</th>
+                        <th scope="col">Usage Examples</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>Context7</code></td>
+                        <td>Official library documentation and framework patterns</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude --c7 "React useEffect patterns"</code><br>
+                                <code>claude --context7 "Next.js API routes"</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>Magic</code></td>
+                        <td>Modern UI component generation from 21st.dev</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude --magic "create responsive dashboard"</code><br>
+                                <code>claude --magic "accessible form components"</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>Sequential</code></td>
+                        <td>Complex multi-step reasoning and analysis</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude --seq "debug authentication flow"</code><br>
+                                <code>claude --sequential "analyze system architecture"</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>Morphllm</code></td>
+                        <td>Pattern-based code editing and transformations</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude --morph "update all React classes to hooks"</code><br>
+                                <code>claude --morphllm "enforce ESLint rules"</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>Playwright</code></td>
+                        <td>Browser automation and E2E testing</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude --play "test login flow"</code><br>
+                                <code>claude --playwright "accessibility validation"</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>Serena</code></td>
+                        <td>Semantic code understanding and project memory</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude --serena "rename function across project"</code><br>
+                                <code>/sc:load --deep</code>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Advanced Execution Flags</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">Flag</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Usage Examples</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>--think</code></td>
+                        <td>Enable structured analysis (~4K tokens)</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude --think "analyze architecture"</code><br>
+                                <code>"debug this issue" --think</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>--think-hard</code></td>
+                        <td>Deep analysis with Sequential MCP (~10K tokens)</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude --think-hard "system redesign"</code><br>
+                                <code>"performance optimization" --think-hard</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>--ultrathink</code></td>
+                        <td>Maximum depth analysis (~32K tokens)</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude --ultrathink "legacy modernization"</code><br>
+                                <code>"critical system debugging" --ultrathink</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>--uc</code> / <code>--ultracompressed</code></td>
+                        <td>Symbol-enhanced communication (30-50% token reduction)</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude --uc "large codebase analysis"</code><br>
+                                <code>claude --ultracompressed --scope project</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>--delegate</code></td>
+                        <td>Enable sub-agent parallel processing</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude --delegate auto "refactor entire project"</code><br>
+                                <code>claude --delegate files "analyze 50+ files"</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>--concurrency [n]</code></td>
+                        <td>Control max concurrent operations (1-15)</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude --concurrency 5 "parallel analysis"</code><br>
+                                <code>claude --concurrency 10 --delegate</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>--all-mcp</code></td>
+                        <td>Enable all MCP servers for maximum capability</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude --all-mcp "complex multi-domain problem"</code><br>
+                                <code>claude --all-mcp --ultrathink</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>--no-mcp</code></td>
+                        <td>Disable all MCP servers, native tools only</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude --no-mcp "simple task"</code><br>
+                                <code>claude --no-mcp --performance-priority</code>
+                            </div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </section>
@@ -604,13 +907,13 @@
         <section id="superclaude-framework">
             <h2>SuperClaude Framework Commands</h2>
             
-            <h3>All 16 Slash Commands</h3>
+            <h3>All 23 Slash Commands</h3>
             <table>
                 <thead>
                     <tr>
-                        <th>Command</th>
-                        <th>Description</th>
-                        <th>Usage Examples</th>
+                        <th scope="col">Command</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Usage Examples</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -788,6 +1091,150 @@
                             </div>
                         </td>
                     </tr>
+                    <tr>
+                        <td><code>/sc:business-panel</code></td>
+                        <td>Multi-expert business analysis with 9 business thought leaders</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:business-panel @strategy_doc.pdf</code><br>
+                                <code>/sc:business-panel "market analysis" --experts porter,christensen</code><br>
+                                <code>/sc:business-panel --mode debate --focus innovation</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/sc:save</code></td>
+                        <td>Save session context and project memory</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:save session_name</code><br>
+                                <code>/sc:save --checkpoint --summary</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/sc:brainstorm</code></td>
+                        <td>Interactive requirements discovery and ideation</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:brainstorm "AI project management tool"</code><br>
+                                <code>/sc:brainstorm --strategy systematic --depth deep</code><br>
+                                <code>/sc:brainstorm --strategy agile --parallel</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/sc:reflect</code></td>
+                        <td>Task reflection and validation analysis</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:reflect --type task --analyze</code><br>
+                                <code>/sc:reflect --type session --validate</code><br>
+                                <code>/sc:reflect --type completion</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/sc:workflow</code></td>
+                        <td>Implementation workflow generation</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:workflow "authentication system" --strategy agile</code><br>
+                                <code>/sc:workflow @prd.md --strategy systematic --depth deep</code><br>
+                                <code>/sc:workflow enterprise-project --validate</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/sc:spec-panel</code></td>
+                        <td>Expert specification review with multiple specialists</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:spec-panel @api.spec.yml --mode critique</code><br>
+                                <code>/sc:spec-panel "user story" --mode discussion</code><br>
+                                <code>/sc:spec-panel @system.spec --focus architecture</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/sc:select-tool</code></td>
+                        <td>Intelligent MCP tool selection and optimization</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:select-tool "rename across 10 files" --analyze</code><br>
+                                <code>/sc:select-tool "bulk code updates" --explain</code><br>
+                                <code>/sc:select-tool "save project context"</code>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Business Expert Panel (9 Thought Leaders)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">Expert</th>
+                        <th scope="col">Expertise</th>
+                        <th scope="col">Key Frameworks</th>
+                        <th scope="col">Usage Context</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>🔨 <strong>Christensen</strong></td>
+                        <td>Innovation & Disruption</td>
+                        <td>Jobs-to-be-Done, Disruption Theory</td>
+                        <td>Product innovation, market entry strategy</td>
+                    </tr>
+                    <tr>
+                        <td>📊 <strong>Porter</strong></td>
+                        <td>Competitive Strategy</td>
+                        <td>Five Forces, Value Chain Analysis</td>
+                        <td>Industry analysis, competitive positioning</td>
+                    </tr>
+                    <tr>
+                        <td>🧭 <strong>Drucker</strong></td>
+                        <td>Management Principles</td>
+                        <td>Management by Objectives, Innovation</td>
+                        <td>Organizational effectiveness, strategic planning</td>
+                    </tr>
+                    <tr>
+                        <td>🎪 <strong>Godin</strong></td>
+                        <td>Marketing & Tribes</td>
+                        <td>Purple Cow, Permission Marketing</td>
+                        <td>Brand differentiation, customer engagement</td>
+                    </tr>
+                    <tr>
+                        <td>🌊 <strong>Kim & Mauborgne</strong></td>
+                        <td>Blue Ocean Strategy</td>
+                        <td>Value Innovation, Four Actions Framework</td>
+                        <td>Market creation, differentiation strategy</td>
+                    </tr>
+                    <tr>
+                        <td>🚀 <strong>Collins</strong></td>
+                        <td>Organizational Excellence</td>
+                        <td>Good to Great, Built to Last</td>
+                        <td>Performance transformation, culture building</td>
+                    </tr>
+                    <tr>
+                        <td>🛡️ <strong>Taleb</strong></td>
+                        <td>Risk & Uncertainty</td>
+                        <td>Antifragility, Black Swan Theory</td>
+                        <td>Risk management, resilience planning</td>
+                    </tr>
+                    <tr>
+                        <td>🕸️ <strong>Meadows</strong></td>
+                        <td>Systems Thinking</td>
+                        <td>Leverage Points, System Dynamics</td>
+                        <td>Complex problem solving, organizational change</td>
+                    </tr>
+                    <tr>
+                        <td>💬 <strong>Doumont</strong></td>
+                        <td>Communication Excellence</td>
+                        <td>Cognitive Load Theory, Message Clarity</td>
+                        <td>Presentation optimization, documentation clarity</td>
+                    </tr>
                 </tbody>
             </table>
 
@@ -795,10 +1242,10 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Persona</th>
-                        <th>Trigger Flag</th>
-                        <th>Auto-Activation Context</th>
-                        <th>Specialization</th>
+                        <th scope="col">Persona</th>
+                        <th scope="col">Trigger Flag</th>
+                        <th scope="col">Auto-Activation Context</th>
+                        <th scope="col">Specialization</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -858,6 +1305,50 @@
                     </tr>
                 </tbody>
             </table>
+
+            <h3>Memory Management & Session Persistence</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">Pattern</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Usage Examples</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>/sc:load --deep</code></td>
+                        <td>Load comprehensive project context</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:load --deep --summary</code><br>
+                                <code>/sc:load project-overview</code><br>
+                                <code>/sc:load --focus architecture</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/sc:save checkpoints</code></td>
+                        <td>Create session restoration points</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:save --checkpoint "auth-complete"</code><br>
+                                <code>/sc:save session_name --summary</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>Cross-session patterns</code></td>
+                        <td>Maintain context between sessions</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:load → Work → /sc:save → Resume later</code><br>
+                                <code>Session lifecycle management</code>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
 
         <section id="superclaude-cli">
@@ -867,9 +1358,9 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Command</th>
-                        <th>Description</th>
-                        <th>Usage Examples</th>
+                        <th scope="col">Command</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Usage Examples</th>
                     </tr>
                 </thead>
                 <tbody>

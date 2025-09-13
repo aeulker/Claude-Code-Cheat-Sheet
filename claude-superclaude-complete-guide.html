@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,8 +14,11 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: #f5f5f5;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
         /* Header Navigation */
@@ -277,6 +280,21 @@
             background: linear-gradient(135deg, #FFF8E7 0%, #FFEDCC 100%);
         }
 
+        .mcp-district {
+            border-color: #20B2AA;
+            background: linear-gradient(135deg, #E0FFFF 0%, #AFEEEE 100%);
+        }
+
+        .business-district {
+            border-color: #B8860B;
+            background: linear-gradient(135deg, #FFF8DC 0%, #F0E68C 100%);
+        }
+
+        .advanced-district {
+            border-color: #8B0000;
+            background: linear-gradient(135deg, #FFE4E1 0%, #FFC0CB 100%);
+        }
+
         /* Interactive Map Styles */
         .map-container {
             position: relative;
@@ -378,13 +396,41 @@
         }
 
         .map-git-district {
+            width: 160px;
+            height: 100px;
+            left: 15%;
+            bottom: 30px;
+            background: linear-gradient(135deg, #FFA500 0%, #FF8C00 100%);
+            border: 4px solid #D2691E;
+        }
+
+        .map-mcp-district {
             width: 200px;
+            height: 140px;
+            left: 50%;
+            top: 280px;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #20B2AA 0%, #008B8B 100%);
+            border: 4px solid #006666;
+        }
+
+        .map-business-district {
+            width: 190px;
+            height: 130px;
+            right: 15%;
+            bottom: 30px;
+            background: linear-gradient(135deg, #B8860B 0%, #DAA520 100%);
+            border: 4px solid #8B6914;
+        }
+
+        .map-advanced-district {
+            width: 160px;
             height: 120px;
             left: 50%;
             bottom: 30px;
             transform: translateX(-50%);
-            background: linear-gradient(135deg, #FFA500 0%, #FF8C00 100%);
-            border: 4px solid #D2691E;
+            background: linear-gradient(135deg, #8B0000 0%, #DC143C 100%);
+            border: 4px solid #800000;
         }
 
         .district-label {
@@ -512,37 +558,238 @@
             box-shadow: 0 15px 40px rgba(0,0,0,0.4);
         }
 
-        /* Responsive */
+        /* Enhanced Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            .district-zone {
+                animation: none !important;
+            }
+        }
+
+        /* Focus indicators for better keyboard navigation */
+        .nav-tab:focus,
+        .district-zone:focus,
+        .tour-button:focus {
+            outline: 3px solid #667eea;
+            outline-offset: 2px;
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            body {
+                background: white;
+                color: black;
+            }
+            
+            .district {
+                border-width: 3px;
+                border-style: solid;
+            }
+            
+            .nav-tab {
+                border: 2px solid currentColor;
+            }
+        }
+
+        /* Enhanced Loading States */
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .loading {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255,255,255,0.4), 
+                transparent
+            );
+            transform: translateX(-100%);
+            animation: shimmer 2s infinite;
+        }
+
+        /* Responsive Design Enhancements */
+        @media (max-width: 1200px) {
+            .map-container {
+                height: 700px;
+            }
+            
+            .district-zone {
+                font-size: 0.9rem;
+            }
+        }
+
         @media (max-width: 768px) {
             .header-title {
                 font-size: 1.5rem;
             }
 
             .nav-tabs {
-                gap: 5px;
+                gap: 8px;
+                padding: 0 10px;
             }
 
             .nav-tab {
-                padding: 8px 15px;
-                font-size: 0.9rem;
+                padding: 10px 16px;
+                font-size: 0.85rem;
+                min-width: auto;
+                flex: 1;
+                justify-content: center;
+            }
+
+            .nav-icon {
+                font-size: 1rem;
             }
 
             .map-container {
-                height: 600px;
+                height: 500px;
+                margin: 15px auto;
             }
 
             .info-panel {
-                width: 90%;
-                right: 5%;
-                left: 5%;
+                width: 95%;
+                right: 2.5%;
+                left: 2.5%;
+                top: 160px;
+                max-height: 50vh;
             }
 
-            table {
+            .district-zone {
+                font-size: 0.7rem;
+                padding: 5px;
+            }
+
+            .district-label {
+                font-size: 0.7rem;
+            }
+
+            /* Adjust district positions for mobile */
+            .map-central-hub {
+                width: 120px;
+                height: 120px;
+            }
+
+            .map-command-district,
+            .map-flag-district,
+            .map-superclaude-district,
+            .map-persona-district {
+                width: 100px;
+                height: 80px;
+            }
+
+            .map-git-district,
+            .map-business-district,
+            .map-advanced-district {
+                width: 80px;
+                height: 60px;
+            }
+
+            .district {
+                padding: 15px;
+                margin: 15px 0;
+            }
+
+            .district-title {
+                font-size: 1.4rem;
+            }
+
+            .building {
+                padding: 12px;
+                margin: 8px 0;
+            }
+
+            .building-name {
+                font-size: 1rem;
+            }
+
+            .room {
+                padding: 6px 10px;
                 font-size: 0.85rem;
             }
 
-            th, td {
-                padding: 8px;
+            .memory-tip {
+                padding: 12px;
+                margin: 15px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-container {
+                padding: 0 15px;
+            }
+
+            .nav-tab {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
+
+            .nav-tab .nav-icon {
+                display: none;
+            }
+
+            .palace-container {
+                padding: 10px;
+            }
+
+            .district {
+                padding: 12px;
+            }
+
+            .district-title {
+                font-size: 1.2rem;
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .district-icon {
+                font-size: 1.5rem;
+            }
+
+            .tour-button {
+                bottom: 20px;
+                right: 20px;
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .main-header,
+            .tour-button,
+            .info-panel {
+                display: none;
+            }
+
+            .palace-container {
+                max-width: 100%;
+                padding: 0;
+            }
+
+            .district {
+                page-break-inside: avoid;
+                box-shadow: none;
+                border: 2px solid #ccc;
+            }
+
+            body {
+                background: white;
+                color: black;
             }
         }
     </style>
@@ -661,6 +908,51 @@
                         <span class="room-name">/compact</span>
                         <span class="room-description">Sıkıştırma deposu</span>
                     </div>
+                    <div class="room">
+                        <span class="room-icon">💰</span>
+                        <span class="room-name">/cost</span>
+                        <span class="room-description">Token maliyet hesap bürosu</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🎭</span>
+                        <span class="room-name">/model</span>
+                        <span class="room-description">AI model seçim galerisi</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">📊</span>
+                        <span class="room-name">/status</span>
+                        <span class="room-description">Sistem durum kontrol odası</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🔍</span>
+                        <span class="room-name">/review</span>
+                        <span class="room-description">Kod inceleme merkezi</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">💾</span>
+                        <span class="room-name">/memory</span>
+                        <span class="room-description">CLAUDE.md hafıza editörü</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">⌨️</span>
+                        <span class="room-name">/vim</span>
+                        <span class="room-description">Vim modu editör salonu</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🚪</span>
+                        <span class="room-name">/login /logout</span>
+                        <span class="room-description">Giriş-çıkış kapısı</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🐛</span>
+                        <span class="room-name">/bug</span>
+                        <span class="room-description">Hata raporlama ofisi</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🎨</span>
+                        <span class="room-name">/ui /logo</span>
+                        <span class="room-description">UI bileşen ve logo atölyesi</span>
+                    </div>
                 </div>
             </div>
 
@@ -705,6 +997,76 @@
                         <span class="room-name">/sc:improve</span>
                         <span class="room-description">İyileştirme kliniği</span>
                     </div>
+                    <div class="room">
+                        <span class="room-icon">🧪</span>
+                        <span class="room-name">/sc:test</span>
+                        <span class="room-description">Test laboratuvarı</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🧽</span>
+                        <span class="room-name">/sc:cleanup</span>
+                        <span class="room-description">Kod temizlik merkezi</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">📚</span>
+                        <span class="room-name">/sc:document</span>
+                        <span class="room-description">Dokümantasyon stüdyosu</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">📈</span>
+                        <span class="room-name">/sc:estimate</span>
+                        <span class="room-description">Proje tahmin ofisi</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">📋</span>
+                        <span class="room-name">/sc:task</span>
+                        <span class="room-description">Görev yönetim merkezi</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">📇</span>
+                        <span class="room-name">/sc:index</span>
+                        <span class="room-description">Proje indeksleme birimi</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🎭</span>
+                        <span class="room-name">/sc:spawn</span>
+                        <span class="room-description">Alt-görev oluşturma merkezi</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🎓</span>
+                        <span class="room-name">/sc:explain</span>
+                        <span class="room-description">Eğitim ve açıklama sınıfı</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">📦</span>
+                        <span class="room-name">/sc:git</span>
+                        <span class="room-description">Git işlemleri garage'ı</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">💡</span>
+                        <span class="room-name">/sc:brainstorm</span>
+                        <span class="room-description">Fikir geliştirme atölyesi</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🪞</span>
+                        <span class="room-name">/sc:reflect</span>
+                        <span class="room-description">Yansıtma ve değerlendirme odası</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🔄</span>
+                        <span class="room-name">/sc:workflow</span>
+                        <span class="room-description">İş akışı üretim merkezi</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">📋</span>
+                        <span class="room-name">/sc:spec-panel</span>
+                        <span class="room-description">Spesifikasyon uzmanları salonu</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🎯</span>
+                        <span class="room-name">/sc:select-tool</span>
+                        <span class="room-description">Araç seçim danışmanlığı</span>
+                    </div>
                 </div>
             </div>
 
@@ -715,7 +1077,7 @@
                     KARAKTER MAHALLESİ - 9 Persona
                 </div>
                 <div class="building" style="border-color: #FF69B4;">
-                    <div class="building-name">🎪 Karakter Tiyatrosu</div>
+                    <div class="building-name">🎪 Ana Karakter Tiyatrosu</div>
                     <div class="room">
                         <span class="room-icon">🏗️</span>
                         <span class="room-name">architect</span>
@@ -731,16 +1093,204 @@
                         <span class="room-name">backend</span>
                         <span class="room-description">Mühendis - Server</span>
                     </div>
+                    <div class="room">
+                        <span class="room-icon">🛡️</span>
+                        <span class="room-name">security</span>
+                        <span class="room-description">Güvenlik şefi - OWASP</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🔍</span>
+                        <span class="room-name">analyzer</span>
+                        <span class="room-description">Dedektif - Hata bulma</span>
+                    </div>
+                </div>
+                <div class="building" style="border-color: #FF69B4;">
+                    <div class="building-name">🎭 Uzman Karakter Salonu</div>
+                    <div class="room">
+                        <span class="room-icon">👨‍🏫</span>
+                        <span class="room-name">mentor</span>
+                        <span class="room-description">Öğretmen - Eğitim ve rehberlik</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🔄</span>
+                        <span class="room-name">refactorer</span>
+                        <span class="room-description">Yenileyici - Kod iyileştirme</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">⚡</span>
+                        <span class="room-name">performance</span>
+                        <span class="room-description">Hız ustası - Optimizasyon</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">✍️</span>
+                        <span class="room-name">scribe</span>
+                        <span class="room-description">Yazman - Teknik dokümantasyon</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MCP Integration Quarter -->
+            <div class="district mcp-district">
+                <div class="district-title">
+                    <span class="district-icon">🔌</span>
+                    MCP ENTEGRASYON MAHALLESİ - Model Context Protocol
+                </div>
+                <div class="building" style="border-color: #20B2AA;">
+                    <div class="building-name">🏢 Dokümantasyon Merkezi</div>
+                    <div class="room">
+                        <span class="room-icon">📚</span>
+                        <span class="room-name">Context7</span>
+                        <span class="room-description">Resmi kütüphane dokümantasyonu</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🎨</span>
+                        <span class="room-name">Magic</span>
+                        <span class="room-description">21st.dev UI bileşen üreticisi</span>
+                    </div>
+                </div>
+                <div class="building" style="border-color: #20B2AA;">
+                    <div class="building-name">🧠 Analiz Laboratuvarı</div>
+                    <div class="room">
+                        <span class="room-icon">🔄</span>
+                        <span class="room-name">Sequential</span>
+                        <span class="room-description">Çok adımlı mantık yürütme</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🔧</span>
+                        <span class="room-name">Morphllm</span>
+                        <span class="room-description">Toplu kod dönüşümü</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🎭</span>
+                        <span class="room-name">Playwright</span>
+                        <span class="room-description">Tarayıcı otomasyon tiyatrosu</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🧭</span>
+                        <span class="room-name">Serena</span>
+                        <span class="room-description">Proje hafızası ve navigasyon</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Business Expert Plaza -->
+            <div class="district business-district">
+                <div class="district-title">
+                    <span class="district-icon">🏛️</span>
+                    İŞ UZMANLARI PLAZA - Business Panel
+                </div>
+                <div class="building" style="border-color: #B8860B;">
+                    <div class="building-name">🎪 Strateji Konsültanlık Firması</div>
+                    <div class="room">
+                        <span class="room-icon">🔨</span>
+                        <span class="room-name">Christensen</span>
+                        <span class="room-description">İnovasyon ve yıkıcı teknoloji</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">📊</span>
+                        <span class="room-name">Porter</span>
+                        <span class="room-description">Rekabet stratejisi uzmanı</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🧭</span>
+                        <span class="room-name">Drucker</span>
+                        <span class="room-description">Yönetim biliminin babası</span>
+                    </div>
+                </div>
+                <div class="building" style="border-color: #B8860B;">
+                    <div class="building-name">🌊 Pazarlama ve Sistem Uzmanları</div>
+                    <div class="room">
+                        <span class="room-icon">🎪</span>
+                        <span class="room-name">Godin</span>
+                        <span class="room-description">Mor İnek ve kabile pazarlamacısı</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🌊</span>
+                        <span class="room-name">Kim & Mauborgne</span>
+                        <span class="room-description">Mavi Okyanus stratejisti</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🚀</span>
+                        <span class="room-name">Collins</span>
+                        <span class="room-description">İyiden Mükemmele uzmanı</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🛡️</span>
+                        <span class="room-name">Taleb</span>
+                        <span class="room-description">Kara Kuğu ve antifragility</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🕸️</span>
+                        <span class="room-name">Meadows</span>
+                        <span class="room-description">Sistem düşünce uzmanı</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">💬</span>
+                        <span class="room-name">Doumont</span>
+                        <span class="room-description">İletişim ve sunum uzmanı</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advanced Execution Zone -->
+            <div class="district advanced-district">
+                <div class="district-title">
+                    <span class="district-icon">🚀</span>
+                    GELİŞMİŞ YÜRÜTME ALANI - Advanced Features
+                </div>
+                <div class="building" style="border-color: #8B0000;">
+                    <div class="building-name">🧠 Düşünce Kateleri</div>
+                    <div class="room">
+                        <span class="room-icon">💭</span>
+                        <span class="room-name">--think</span>
+                        <span class="room-description">Standart analiz katı</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🔥</span>
+                        <span class="room-name">--think-hard</span>
+                        <span class="room-description">Derin analiz katı</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">💎</span>
+                        <span class="room-name">--ultrathink</span>
+                        <span class="room-description">Maksimum derinlik katı</span>
+                    </div>
+                </div>
+                <div class="building" style="border-color: #8B0000;">
+                    <div class="building-name">⚡ Performans ve Hafıza Merkezi</div>
+                    <div class="room">
+                        <span class="room-icon">📦</span>
+                        <span class="room-name">--uc</span>
+                        <span class="room-description">Ultra sıkıştırma deposu</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">👥</span>
+                        <span class="room-name">--delegate</span>
+                        <span class="room-description">Alt görev dağıtım merkezi</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">💾</span>
+                        <span class="room-name">/sc:load</span>
+                        <span class="room-description">Hafıza yükleme odası</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">💾</span>
+                        <span class="room-name">/sc:save</span>
+                        <span class="room-description">Hafıza kayıt odası</span>
+                    </div>
                 </div>
             </div>
 
             <div class="memory-tip">
-                <div class="memory-tip-title">💡 Hatırlama İpuçları:</div>
+                <div class="memory-tip-title">💡 Genişletilmiş Hatırlama İpuçları:</div>
                 <ul>
                     <li><strong>Merkez Meydan (Altın):</strong> Altın kapılar - En değerli başlangıç komutları</li>
                     <li><strong>Komut Mahallesi (Mavi):</strong> Deniz gibi temiz ve düzenli - Temel slash komutları</li>
                     <li><strong>Süper Bölge (Mor):</strong> Kraliyet rengi - Güçlü SuperClaude komutları</li>
                     <li><strong>Karakter Mahallesi (Pembe):</strong> Tiyatro perdesi - 9 farklı rol</li>
+                    <li><strong>MCP Mahallesi (Turkuaz):</strong> Teknoloji kabloları - Entegrasyon protokolleri</li>
+                    <li><strong>İş Uzmanları Plaza (Altın):</strong> Kurumsal renk - 9 iş stratejisti</li>
+                    <li><strong>Gelişmiş Alan (Kırmızı):</strong> Enerji yoğunluğu - Maksimum performans</li>
                 </ul>
             </div>
         </div>
@@ -777,7 +1327,22 @@
             
             <div class="district-zone map-git-district" data-district="git">
                 <div class="district-icon">📦</div>
-                <div class="district-label">GIT LİMANI</div>
+                <div class="district-label">GIT<br>LİMANI</div>
+            </div>
+            
+            <div class="district-zone map-mcp-district" data-district="mcp">
+                <div class="district-icon">🔌</div>
+                <div class="district-label">MCP<br>ENTEGRASYON</div>
+            </div>
+            
+            <div class="district-zone map-business-district" data-district="business">
+                <div class="district-icon">🏛️</div>
+                <div class="district-label">İŞ UZMANLARI<br>PLAZA</div>
+            </div>
+            
+            <div class="district-zone map-advanced-district" data-district="advanced">
+                <div class="district-icon">🚀</div>
+                <div class="district-label">GELİŞMİŞ<br>ALAN</div>
             </div>
         </div>
 
@@ -855,7 +1420,14 @@
                     { name: '/clear', desc: 'Temizlik hizmetleri - Geçmişi temizle' },
                     { name: '/compact', desc: 'Sıkıştırma deposu - Konuşmayı sıkıştır' },
                     { name: '/cost', desc: 'Muhasebe - Token kullanımı' },
-                    { name: '/model', desc: 'Model galerisi - AI modeli seç' }
+                    { name: '/model', desc: 'Model galerisi - AI modeli seç' },
+                    { name: '/status', desc: 'Sistem durum kontrol odası' },
+                    { name: '/review', desc: 'Kod inceleme merkezi' },
+                    { name: '/memory', desc: 'CLAUDE.md hafıza editörü' },
+                    { name: '/vim', desc: 'Vim modu editör salonu' },
+                    { name: '/login /logout', desc: 'Giriş-çıkış kapısı' },
+                    { name: '/bug', desc: 'Hata raporlama ofisi' },
+                    { name: '/ui /logo', desc: 'UI bileşen ve logo atölyesi' }
                 ],
                 color: '#4169E1'
             },
@@ -881,7 +1453,22 @@
                     { name: '/sc:design', desc: 'Tasarım stüdyosu - Planlama' },
                     { name: '/sc:analyze', desc: 'Analiz laboratuvarı - Kod analizi' },
                     { name: '/sc:troubleshoot', desc: 'Sorun giderme - Hata ayıklama' },
-                    { name: '/sc:test', desc: 'Test merkezi - Birim testleri' }
+                    { name: '/sc:test', desc: 'Test merkezi - Birim testleri' },
+                    { name: '/sc:improve', desc: 'İyileştirme kliniği - Kod geliştirme' },
+                    { name: '/sc:cleanup', desc: 'Kod temizlik merkezi - Bakım ve düzen' },
+                    { name: '/sc:document', desc: 'Dokümantasyon stüdyosu - Teknik yazım' },
+                    { name: '/sc:estimate', desc: 'Proje tahmin ofisi - Zaman ve kaynak' },
+                    { name: '/sc:task', desc: 'Görev yönetim merkezi - İş organizasyonu' },
+                    { name: '/sc:index', desc: 'Proje indeksleme birimi - Kataloglama' },
+                    { name: '/sc:load', desc: 'Hafıza yükleme odası - Bağlam geri yükleme' },
+                    { name: '/sc:spawn', desc: 'Alt-görev oluşturma merkezi - Delegasyon' },
+                    { name: '/sc:explain', desc: 'Eğitim ve açıklama sınıfı - Öğretim' },
+                    { name: '/sc:git', desc: 'Git işlemleri garage\'ı - Versiyon kontrol' },
+                    { name: '/sc:brainstorm', desc: 'Fikir geliştirme atölyesi - Gereksinim keşfi' },
+                    { name: '/sc:reflect', desc: 'Yansıtma odası - Görev değerlendirme' },
+                    { name: '/sc:workflow', desc: 'İş akışı üretim merkezi - Süreç otomasyonu' },
+                    { name: '/sc:spec-panel', desc: 'Spesifikasyon uzmanları salonu - Çok-uzman inceleme' },
+                    { name: '/sc:select-tool', desc: 'Araç seçim danışmanlığı - MCP optimizasyon' }
                 ],
                 color: '#9370DB'
             },
@@ -894,7 +1481,10 @@
                     { name: '⚙️ backend', desc: 'Mühendis - Sunucu uzmanı' },
                     { name: '🛡️ security', desc: 'Güvenlik şefi - OWASP uzmanı' },
                     { name: '🔍 analyzer', desc: 'Dedektif - Hata bulma uzmanı' },
-                    { name: '⚡ performance', desc: 'Hız ustası - Optimizasyon uzmanı' }
+                    { name: '👨‍🏫 mentor', desc: 'Öğretmen - Eğitim ve rehberlik uzmanı' },
+                    { name: '🔄 refactorer', desc: 'Yenileyici - Kod iyileştirme uzmanı' },
+                    { name: '⚡ performance', desc: 'Hız ustası - Optimizasyon uzmanı' },
+                    { name: '✍️ scribe', desc: 'Yazman - Teknik dokümantasyon uzmanı' }
                 ],
                 color: '#FF69B4'
             },
@@ -908,21 +1498,98 @@
                     { name: 'superclaude readme', desc: 'Kullanım kılavuzu - README oluştur' }
                 ],
                 color: '#FFA500'
+            },
+            mcp: {
+                title: '🔌 MCP Entegrasyon Mahallesi',
+                description: 'Model Context Protocol sunucularının bulunduğu teknoloji merkezi.',
+                commands: [
+                    { name: 'Context7', desc: 'Resmi kütüphane dokümantasyonu ve framework rehberi' },
+                    { name: 'Magic', desc: '21st.dev UI bileşen üreticisi' },
+                    { name: 'Sequential', desc: 'Çok adımlı mantık yürütme motoru' },
+                    { name: 'Morphllm', desc: 'Toplu kod dönüşüm ve düzenleme aracı' },
+                    { name: 'Playwright', desc: 'Tarayıcı otomasyon ve E2E test tiyatrosu' },
+                    { name: 'Serena', desc: 'Proje hafızası ve semantik kod navigasyonu' }
+                ],
+                color: '#20B2AA'
+            },
+            business: {
+                title: '🏛️ İş Uzmanları Plaza',
+                description: '9 dünya çapında iş stratejisti uzmanın yaşadığı prestijli plaza.',
+                commands: [
+                    { name: '🔨 Christensen', desc: 'İnovasyon ve yıkıcı teknoloji uzmanı' },
+                    { name: '📊 Porter', desc: 'Rekabet stratejisi ve beş kuvvet analizi' },
+                    { name: '🧭 Drucker', desc: 'Yönetim biliminin babası ve hedeflere göre yönetim' },
+                    { name: '🎪 Godin', desc: 'Mor İnek pazarlama ve kabile lideri' },
+                    { name: '🌊 Kim & Mauborgne', desc: 'Mavi Okyanus stratejisi ve değer inovasyonu' },
+                    { name: '🚀 Collins', desc: 'İyiden Mükemmele ve uzun ömürlü şirketler' },
+                    { name: '🛡️ Taleb', desc: 'Kara Kuğu teorisi ve antifragility' },
+                    { name: '🕸️ Meadows', desc: 'Sistem düşüncesi ve müdahale noktaları' },
+                    { name: '💬 Doumont', desc: 'Bilişsel yük ve iletişim mükemmelliği' }
+                ],
+                color: '#B8860B'
+            },
+            advanced: {
+                title: '🚀 Gelişmiş Yürütme Alanı',
+                description: 'Maksimum performans ve gelişmiş özellikler için yüksek enerji bölgesi.',
+                commands: [
+                    { name: '--think', desc: 'Standart analiz modu (~4K token)' },
+                    { name: '--think-hard', desc: 'Derin analiz modu (~10K token)' },
+                    { name: '--ultrathink', desc: 'Maksimum derinlik analizi (~32K token)' },
+                    { name: '--uc', desc: 'Ultra sıkıştırma modu (%30-50 token tasarrufu)' },
+                    { name: '--delegate', desc: 'Alt-görev paralel işleme sistemi' },
+                    { name: '/sc:load', desc: 'Proje hafızası yükleme' },
+                    { name: '/sc:save', desc: 'Oturum hafızası kaydetme' },
+                    { name: '/sc:business-panel', desc: 'Çok-uzman iş analizi paneli' }
+                ],
+                color: '#8B0000'
             }
         };
         
-        // District click handlers for interactive map
+        // Enhanced district interaction handlers for interactive map
         document.querySelectorAll('.district-zone').forEach(zone => {
+            // Make districts focusable with keyboard
+            zone.setAttribute('tabindex', '0');
+            zone.setAttribute('role', 'button');
+            zone.setAttribute('aria-label', `Explore ${zone.dataset.district} district`);
+            
+            // Click handler
             zone.addEventListener('click', function() {
                 const districtKey = this.dataset.district;
                 showDistrictInfo(districtKey);
-                
-                // Remove active class from all zones
-                document.querySelectorAll('.district-zone').forEach(z => z.classList.remove('active'));
-                // Add active class to clicked zone
-                this.classList.add('active');
+                activateDistrict(this);
+            });
+            
+            // Keyboard handler
+            zone.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+            
+            // Enhanced hover effects
+            zone.addEventListener('mouseenter', function() {
+                if (!this.classList.contains('active')) {
+                    this.style.transform = 'scale(1.02)';
+                }
+            });
+            
+            zone.addEventListener('mouseleave', function() {
+                if (!this.classList.contains('active')) {
+                    this.style.transform = '';
+                }
             });
         });
+        
+        function activateDistrict(activeZone) {
+            // Remove active class from all zones
+            document.querySelectorAll('.district-zone').forEach(z => {
+                z.classList.remove('active');
+                z.style.transform = '';
+            });
+            // Add active class to clicked zone
+            activeZone.classList.add('active');
+        }
         
         function showDistrictInfo(districtKey) {
             const district = districts[districtKey];
@@ -957,7 +1624,7 @@
         
         // Tour functionality
         let tourIndex = 0;
-        const tourOrder = ['central', 'command', 'flag', 'superclaude', 'persona', 'git'];
+        const tourOrder = ['central', 'command', 'flag', 'superclaude', 'persona', 'mcp', 'business', 'advanced', 'git'];
         
         function startTour() {
             tourIndex = 0;
@@ -984,26 +1651,138 @@
             }
         }
         
-        // Keyboard shortcuts
+        // Enhanced keyboard shortcuts and navigation
         document.addEventListener('keydown', function(e) {
+            // Escape key to close panels
             if (e.key === 'Escape') {
                 closeInfoPanel();
+                return;
             }
             
             // Number keys for section navigation
             const numberKeys = {
-                '1': 'reference',
-                '2': 'palace',
-                '3': 'map'
+                '1': 'palace',
+                '2': 'map', 
+                '3': 'reference'
             };
             
             if (e.ctrlKey && numberKeys[e.key]) {
-                const tabs = document.querySelectorAll('.nav-tab');
-                const index = parseInt(e.key) - 1;
-                if (tabs[index]) {
-                    tabs[index].click();
+                e.preventDefault();
+                const section = numberKeys[e.key];
+                if (section === 'reference') {
+                    window.location.href = 'index.html';
+                } else {
+                    showSection(section);
+                }
+                return;
+            }
+            
+            // Arrow key navigation for districts (when map section is active)
+            if (document.getElementById('map-section').classList.contains('active')) {
+                const districts = Array.from(document.querySelectorAll('.district-zone'));
+                const activeDistrict = document.querySelector('.district-zone.active');
+                let currentIndex = districts.indexOf(activeDistrict);
+                
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    currentIndex = (currentIndex + 1) % districts.length;
+                    districts[currentIndex].click();
+                    districts[currentIndex].focus();
+                }
+                
+                if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    currentIndex = currentIndex <= 0 ? districts.length - 1 : currentIndex - 1;
+                    districts[currentIndex].click();
+                    districts[currentIndex].focus();
                 }
             }
+            
+            // 'T' key to start tour
+            if (e.key.toLowerCase() === 't' && document.getElementById('map-section').classList.contains('active')) {
+                e.preventDefault();
+                startTour();
+            }
+            
+            // 'H' key to show help
+            if (e.key.toLowerCase() === 'h' && e.ctrlKey) {
+                e.preventDefault();
+                showHelpModal();
+            }
+        });
+        
+        // Help modal functionality
+        function showHelpModal() {
+            const helpModal = document.createElement('div');
+            helpModal.className = 'help-modal';
+            helpModal.innerHTML = `
+                <div class="help-content">
+                    <h3>🎯 Keyboard Shortcuts</h3>
+                    <ul>
+                        <li><kbd>Ctrl + 1</kbd> - Memory Palace</li>
+                        <li><kbd>Ctrl + 2</kbd> - Interactive Map</li>
+                        <li><kbd>Ctrl + 3</kbd> - Reference Guide</li>
+                        <li><kbd>T</kbd> - Start guided tour (on map)</li>
+                        <li><kbd>↑↓←→</kbd> - Navigate districts (on map)</li>
+                        <li><kbd>Enter/Space</kbd> - Select district</li>
+                        <li><kbd>Escape</kbd> - Close panels</li>
+                        <li><kbd>Ctrl + H</kbd> - Show this help</li>
+                    </ul>
+                    <button onclick="this.parentElement.parentElement.remove()" 
+                            style="margin-top: 20px; padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                        Got it!
+                    </button>
+                </div>
+            `;
+            
+            // Style the help modal
+            helpModal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.8);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 9999;
+                animation: fadeIn 0.3s ease;
+            `;
+            
+            helpModal.querySelector('.help-content').style.cssText = `
+                background: white;
+                padding: 30px;
+                border-radius: 15px;
+                max-width: 500px;
+                width: 90%;
+                text-align: left;
+            `;
+            
+            helpModal.querySelector('kbd').style.cssText = `
+                background: #f0f0f0;
+                padding: 2px 6px;
+                border-radius: 4px;
+                font-family: monospace;
+                border: 1px solid #ccc;
+            `;
+            
+            document.body.appendChild(helpModal);
+            
+            // Focus the close button
+            helpModal.querySelector('button').focus();
+            
+            // Close on click outside
+            helpModal.addEventListener('click', function(e) {
+                if (e.target === helpModal) {
+                    helpModal.remove();
+                }
+            });
+        }
+        
+        // Add loading animation on page load
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
         });
     </script>
 </body>

@@ -1857,7 +1857,7 @@
             elements.forEach(element => {
                 const text = element.getAttribute('data-' + lang);
                 if (text) {
-                    element.textContent = text;
+                    element.innerHTML = text;
                 }
             });
 

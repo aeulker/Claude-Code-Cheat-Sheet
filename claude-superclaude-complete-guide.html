@@ -21,6 +21,43 @@
             overflow-x: hidden;
         }
 
+        .language-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: white;
+            border-radius: 25px;
+            padding: 8px 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .language-toggle button {
+            background: transparent;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            color: #666;
+        }
+
+        .language-toggle button.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .language-toggle button:hover:not(.active) {
+            background: #f0f0f0;
+            color: #333;
+        }
+
         /* Header Navigation */
         .main-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -795,23 +832,28 @@
     </style>
 </head>
 <body>
+    <div class="language-toggle">
+        <button id="lang-en" onclick="switchLanguage('en')">🇬🇧 English</button>
+        <button id="lang-tr" class="active" onclick="switchLanguage('tr')">🇹🇷 Türkçe</button>
+    </div>
+
     <!-- Main Header -->
     <header class="main-header">
         <div class="header-container">
-            <h1 class="header-title">🚀 Claude & SuperClaude Ultimate Reference Guide</h1>
+            <h1 class="header-title"><span data-en="🚀 Claude & SuperClaude Ultimate Reference Guide" data-tr="🚀 Claude & SuperClaude Kapsamlı Referans Kılavuzu">🚀 Claude & SuperClaude Kapsamlı Referans Kılavuzu</span></h1>
             <nav class="nav-tabs">
 
                 <button class="nav-tab active" onclick="showSection('palace')">
                     <span class="nav-icon">🏰</span>
-                    <span>Zihin Sarayı</span>
+                    <span data-en="Memory Palace" data-tr="Zihin Sarayı">Zihin Sarayı</span>
                 </button>
                 <button class="nav-tab" onclick="showSection('map')">
                     <span class="nav-icon">🗺️</span>
-                    <span>İnteraktif Harita</span>
-                </button>    
+                    <span data-en="Interactive Map" data-tr="İnteraktif Harita">İnteraktif Harita</span>
+                </button>
                 <button class="nav-tab" onclick="showSection('reference')">
                     <span class="nav-icon">📚</span>
-                    <span>Komut Referansı</span>
+                    <span data-en="Command Reference" data-tr="Komut Referansı">Komut Referansı</span>
                 </button>				
             </nav>
         </div>
@@ -832,7 +874,7 @@
             <div class="district central-hub">
                 <div class="district-title">
                     <span class="district-icon">🏛️</span>
-                    MERKEZ MEYDAN - Ana Giriş Kapısı
+                    <span data-en="CENTRAL PLAZA - Main Entrance" data-tr="MERKEZ MEYDAN - Ana Giriş Kapısı">MERKEZ MEYDAN - Ana Giriş Kapısı</span>
                 </div>
                 <div class="building" style="border-color: #FFD700;">
                     <div class="building-name">🚪 Ana Giriş Binası</div>
@@ -871,7 +913,7 @@
             <div class="district command-district">
                 <div class="district-title">
                     <span class="district-icon">🏘️</span>
-                    KOMUT MAHALLESİ - Temel İşlemler
+                    <span data-en="COMMAND DISTRICT - Basic Operations" data-tr="KOMUT MAHALLESİ - Temel İşlemler">KOMUT MAHALLESİ - Temel İşlemler</span>
                 </div>
                 <div class="building" style="border-color: #4169E1;">
                     <div class="building-name">🏢 Yönetim Binası</div>
@@ -1067,6 +1109,11 @@
                         <span class="room-name">/sc:select-tool</span>
                         <span class="room-description">Araç seçim danışmanlığı</span>
                     </div>
+                    <div class="room">
+                        <span class="room-icon">🔎</span>
+                        <span class="room-name">/sc:research</span>
+                        <span class="room-description">Derinlemesine araştırma merkezi</span>
+                    </div>
                 </div>
             </div>
 
@@ -1169,6 +1216,16 @@
                         <span class="room-icon">🧭</span>
                         <span class="room-name">Serena</span>
                         <span class="room-description">Proje hafızası ve navigasyon</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🔬</span>
+                        <span class="room-name">Chrome-DevTools</span>
+                        <span class="room-description">Performans analizi ve debug</span>
+                    </div>
+                    <div class="room">
+                        <span class="room-icon">🔎</span>
+                        <span class="room-name">Tavily</span>
+                        <span class="room-description">Web araştırma ve real-time bilgi</span>
                     </div>
                 </div>
             </div>
@@ -1468,7 +1525,8 @@
                     { name: '/sc:reflect', desc: 'Yansıtma odası - Görev değerlendirme' },
                     { name: '/sc:workflow', desc: 'İş akışı üretim merkezi - Süreç otomasyonu' },
                     { name: '/sc:spec-panel', desc: 'Spesifikasyon uzmanları salonu - Çok-uzman inceleme' },
-                    { name: '/sc:select-tool', desc: 'Araç seçim danışmanlığı - MCP optimizasyon' }
+                    { name: '/sc:select-tool', desc: 'Araç seçim danışmanlığı - MCP optimizasyon' },
+                    { name: '/sc:research', desc: 'Derinlemesine araştırma merkezi - Sistematik araştırma' }
                 ],
                 color: '#9370DB'
             },
@@ -1783,6 +1841,36 @@
         // Add loading animation on page load
         window.addEventListener('load', function() {
             document.body.classList.add('loaded');
+        });
+
+        // Language switching functionality
+        function switchLanguage(lang) {
+            // Update active button
+            document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+            document.getElementById('lang-tr').classList.toggle('active', lang === 'tr');
+
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+
+            // Update all translatable elements
+            const elements = document.querySelectorAll('[data-en][data-tr]');
+            elements.forEach(element => {
+                const text = element.getAttribute('data-' + lang);
+                if (text) {
+                    element.textContent = text;
+                }
+            });
+
+            // Save language preference
+            localStorage.setItem('preferredLanguage', lang);
+        }
+
+        // Load saved language preference on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('preferredLanguage') || 'tr';
+            if (savedLang === 'en') {
+                switchLanguage('en');
+            }
         });
     </script>
 </body>

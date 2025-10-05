@@ -26,6 +26,43 @@
             padding: 20px;
         }
 
+        .language-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: white;
+            border-radius: 25px;
+            padding: 8px 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .language-toggle button {
+            background: transparent;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            color: #666;
+        }
+
+        .language-toggle button.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .language-toggle button:hover:not(.active) {
+            background: #f0f0f0;
+            color: #333;
+        }
+
         h1 {
             color: #2c3e50;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -384,8 +421,15 @@
     </style>
 </head>
 <body>
+    <div class="language-toggle">
+        <button id="lang-en" class="active" onclick="switchLanguage('en')">🇬🇧 English</button>
+        <button id="lang-tr" onclick="switchLanguage('tr')">🇹🇷 Türkçe</button>
+    </div>
+
     <div class="container">
-        <h1>📚 Claude Code and SuperClaude Tools Complete Reference Guide</h1>
+        <h1>
+            <span data-en="📚 Claude Code and SuperClaude Tools Complete Reference Guide" data-tr="📚 Claude Code ve SuperClaude Araçları Kapsamlı Referans Kılavuzu">📚 Claude Code and SuperClaude Tools Complete Reference Guide</span>
+        </h1>
         
         <nav>
             <ul>
@@ -400,9 +444,9 @@
         </nav>
 
         <section id="claude-code">
-            <h2>Claude Code Tool Commands</h2>
-            
-            <h3>Core CLI Commands</h3>
+            <h2><span data-en="Claude Code Tool Commands" data-tr="Claude Code Araç Komutları">Claude Code Tool Commands</span></h2>
+
+            <h3><span data-en="Core CLI Commands" data-tr="Temel CLI Komutları">Core CLI Commands</span></h3>
             <table>
                 <thead>
                     <tr>
@@ -481,13 +525,13 @@
                 </tbody>
             </table>
 
-            <h3>CLI Flags Reference</h3>
+            <h3><span data-en="CLI Flags Reference" data-tr="CLI Bayrak Referansı">CLI Flags Reference</span></h3>
             <table>
                 <thead>
                     <tr>
-                        <th scope="col">Flag</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Usage Examples</th>
+                        <th scope="col"><span data-en="Flag" data-tr="Bayrak">Flag</span></th>
+                        <th scope="col"><span data-en="Description" data-tr="Açıklama">Description</span></th>
+                        <th scope="col"><span data-en="Usage Examples" data-tr="Kullanım Örnekleri">Usage Examples</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -579,13 +623,13 @@
                 </tbody>
             </table>
 
-            <h3>Built-in Slash Commands</h3>
+            <h3><span data-en="Built-in Slash Commands" data-tr="Yerleşik Slash Komutları">Built-in Slash Commands</span></h3>
             <table>
                 <thead>
                     <tr>
-                        <th scope="col">Command</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Usage Examples</th>
+                        <th scope="col"><span data-en="Command" data-tr="Komut">Command</span></th>
+                        <th scope="col"><span data-en="Description" data-tr="Açıklama">Description</span></th>
+                        <th scope="col"><span data-en="Usage Examples" data-tr="Kullanım Örnekleri">Usage Examples</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -737,13 +781,13 @@
                 </tbody>
             </table>
 
-            <h3>MCP Server Integration</h3>
+            <h3><span data-en="MCP Server Integration" data-tr="MCP Sunucu Entegrasyonu">MCP Server Integration</span></h3>
             <table>
                 <thead>
                     <tr>
-                        <th scope="col">MCP Server</th>
-                        <th scope="col">Purpose</th>
-                        <th scope="col">Usage Examples</th>
+                        <th scope="col"><span data-en="MCP Server" data-tr="MCP Sunucu">MCP Server</span></th>
+                        <th scope="col"><span data-en="Purpose" data-tr="Amaç">Purpose</span></th>
+                        <th scope="col"><span data-en="Usage Examples" data-tr="Kullanım Örnekleri">Usage Examples</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -807,16 +851,36 @@
                             </div>
                         </td>
                     </tr>
+                    <tr>
+                        <td><code>Chrome-DevTools</code></td>
+                        <td>Performance analysis, debugging, and browser inspection</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude --chrome-devtools "analyze page performance"</code><br>
+                                <code>claude --devtools "debug layout shift issues"</code>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>Tavily</code></td>
+                        <td>Web search and real-time research with multi-source analysis</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>claude --tavily "latest TypeScript features 2024"</code><br>
+                                <code>/sc:research "AI development trends"</code>
+                            </div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
 
-            <h3>Advanced Execution Flags</h3>
+            <h3><span data-en="Advanced Execution Flags" data-tr="Gelişmiş Yürütme Bayrakları">Advanced Execution Flags</span></h3>
             <table>
                 <thead>
                     <tr>
-                        <th scope="col">Flag</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Usage Examples</th>
+                        <th scope="col"><span data-en="Flag" data-tr="Bayrak">Flag</span></th>
+                        <th scope="col"><span data-en="Description" data-tr="Açıklama">Description</span></th>
+                        <th scope="col"><span data-en="Usage Examples" data-tr="Kullanım Örnekleri">Usage Examples</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -905,15 +969,15 @@
         </section>
 
         <section id="superclaude-framework">
-            <h2>SuperClaude Framework Commands</h2>
-            
-            <h3>All 23 Slash Commands</h3>
+            <h2><span data-en="SuperClaude Framework Commands" data-tr="SuperClaude Framework Komutları">SuperClaude Framework Commands</span></h2>
+
+            <h3><span data-en="All 23 Slash Commands" data-tr="Tüm 23 Slash Komutu">All 23 Slash Commands</span></h3>
             <table>
                 <thead>
                     <tr>
-                        <th scope="col">Command</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Usage Examples</th>
+                        <th scope="col"><span data-en="Command" data-tr="Komut">Command</span></th>
+                        <th scope="col"><span data-en="Description" data-tr="Açıklama">Description</span></th>
+                        <th scope="col"><span data-en="Usage Examples" data-tr="Kullanım Örnekleri">Usage Examples</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1167,17 +1231,28 @@
                             </div>
                         </td>
                     </tr>
+                    <tr>
+                        <td><code>/sc:research</code></td>
+                        <td>Deep research with systematic investigation and evidence-based reasoning</td>
+                        <td>
+                            <div class="code-examples">
+                                <code>/sc:research "latest React best practices"</code><br>
+                                <code>/sc:research "security vulnerabilities in Node.js" --comprehensive</code><br>
+                                <code>/sc:research "AI model comparison" --sources academic</code>
+                            </div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
 
-            <h3>Business Expert Panel (9 Thought Leaders)</h3>
+            <h3><span data-en="Business Expert Panel (9 Thought Leaders)" data-tr="İş Uzmanları Paneli (9 Düşünce Lideri)">Business Expert Panel (9 Thought Leaders)</span></h3>
             <table>
                 <thead>
                     <tr>
-                        <th scope="col">Expert</th>
-                        <th scope="col">Expertise</th>
-                        <th scope="col">Key Frameworks</th>
-                        <th scope="col">Usage Context</th>
+                        <th scope="col"><span data-en="Expert" data-tr="Uzman">Expert</span></th>
+                        <th scope="col"><span data-en="Expertise" data-tr="Uzmanlık">Expertise</span></th>
+                        <th scope="col"><span data-en="Key Frameworks" data-tr="Ana Framework'ler">Key Frameworks</span></th>
+                        <th scope="col"><span data-en="Usage Context" data-tr="Kullanım Bağlamı">Usage Context</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1238,14 +1313,14 @@
                 </tbody>
             </table>
 
-            <h3>9 Cognitive Personas</h3>
+            <h3><span data-en="9 Cognitive Personas" data-tr="9 Bilişsel Persona">9 Cognitive Personas</span></h3>
             <table>
                 <thead>
                     <tr>
-                        <th scope="col">Persona</th>
-                        <th scope="col">Trigger Flag</th>
-                        <th scope="col">Auto-Activation Context</th>
-                        <th scope="col">Specialization</th>
+                        <th scope="col"><span data-en="Persona" data-tr="Persona">Persona</span></th>
+                        <th scope="col"><span data-en="Trigger Flag" data-tr="Tetikleme Bayrağı">Trigger Flag</span></th>
+                        <th scope="col"><span data-en="Auto-Activation Context" data-tr="Otomatik Aktivasyon Bağlamı">Auto-Activation Context</span></th>
+                        <th scope="col"><span data-en="Specialization" data-tr="Uzmanlık">Specialization</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1306,13 +1381,13 @@
                 </tbody>
             </table>
 
-            <h3>Memory Management & Session Persistence</h3>
+            <h3><span data-en="Memory Management & Session Persistence" data-tr="Hafıza Yönetimi ve Oturum Kalıcılığı">Memory Management & Session Persistence</span></h3>
             <table>
                 <thead>
                     <tr>
-                        <th scope="col">Pattern</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Usage Examples</th>
+                        <th scope="col"><span data-en="Pattern" data-tr="Model">Pattern</span></th>
+                        <th scope="col"><span data-en="Description" data-tr="Açıklama">Description</span></th>
+                        <th scope="col"><span data-en="Usage Examples" data-tr="Kullanım Örnekleri">Usage Examples</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1435,10 +1510,10 @@
         </section>
 
         <section id="workflows">
-            <h2>Common Workflow Examples</h2>
-            
+            <h2><span data-en="Common Workflow Examples" data-tr="Yaygın İş Akışı Örnekleri">Common Workflow Examples</span></h2>
+
             <div class="workflow-section">
-                <h3>Basic Development Workflow</h3>
+                <h3><span data-en="Basic Development Workflow" data-tr="Temel Geliştirme İş Akışı">Basic Development Workflow</span></h3>
                 <pre><span class="shell-comment"># Start Claude Code</span>
 <span class="shell-command">claude</span>
 
@@ -1636,9 +1711,41 @@
         </section>
 
         <footer style="text-align: center; padding: 30px 0; color: #666; border-top: 2px solid #e0e0e0; margin-top: 50px;">
-            <p>📚 Claude Code & SuperClaude Complete Reference Guide</p>
-            <p style="font-size: 0.9em;">Comprehensive cheat sheet for AI-powered development workflows</p>
+            <p data-en="📚 Claude Code & SuperClaude Complete Reference Guide" data-tr="📚 Claude Code & SuperClaude Kapsamlı Referans Kılavuzu">📚 Claude Code & SuperClaude Complete Reference Guide</p>
+            <p style="font-size: 0.9em;" data-en="Comprehensive cheat sheet for AI-powered development workflows" data-tr="Yapay zeka destekli geliştirme iş akışları için kapsamlı referans">Comprehensive cheat sheet for AI-powered development workflows</p>
         </footer>
     </div>
+
+    <script>
+        // Language switching functionality
+        function switchLanguage(lang) {
+            // Update active button
+            document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+            document.getElementById('lang-tr').classList.toggle('active', lang === 'tr');
+
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+
+            // Update all translatable elements
+            const elements = document.querySelectorAll('[data-en][data-tr]');
+            elements.forEach(element => {
+                const text = element.getAttribute('data-' + lang);
+                if (text) {
+                    element.textContent = text;
+                }
+            });
+
+            // Save language preference
+            localStorage.setItem('preferredLanguage', lang);
+        }
+
+        // Load saved language preference on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('preferredLanguage') || 'en';
+            if (savedLang === 'tr') {
+                switchLanguage('tr');
+            }
+        });
+    </script>
 </body>
 </html>

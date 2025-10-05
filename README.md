@@ -70,6 +70,8 @@ cd Claude-Code-Cheat-Sheet
 - Morphllm: Bulk code editing
 - Playwright: Browser automation
 - Serena: Project memory
+- Chrome-DevTools: Performance analysis and debugging
+- Tavily: Web search and real-time research
 
 ## 🎯 Use Cases
 
